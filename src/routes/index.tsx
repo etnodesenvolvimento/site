@@ -12,9 +12,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "I Seminário Nacional de Etnodesenvolvimento — Santa Maria-RS/Brasil 2026" },
-      { name: "description", content: "11 de julho de 2026 · FEICOOP — Santa Maria/RS. Ancestralidade, Território e Desenvolvimento para um Brasil Plural In Memoriam Jorge da Silva Nascimento." },
+      { name: "description", content: "11 de julho de 2026 · FEICOOP — Santa Maria/RS Ancestralidade, Território e Desenvolvimento para um Brasil Plural In Memoriam Jorge da Silva Nascimento." },
       { property: "og:title", content: "I Seminário Nacional de Etnodesenvolvimento" },
-      { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Santa Maria-RS/Brasil, 11 de julho de 2026." },
+      { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Santa Maria-RS/Brasil, 11 de julho de 2026" },
     ],
   }),
   component: Index,
@@ -245,7 +245,7 @@ function Index() {
           <div className="text-xs font-bold uppercase tracking-[0.3em] text-ink/60 mb-2">In Memoriam Jorge da Silva Nascimento (Jorjão)</div>
           <div className="text-xs font-semibold tracking-wide mb-10" style={{ color: "#d4c19c" }}>Projeto Territórios Sustentáveis Fase II</div>
           <h1 className="text-[2.75rem] md:text-[5.5rem] lg:text-[6.5rem] leading-[1.02] tracking-tight max-w-6xl font-light">
-            I Seminário Nacional<br />de Etnodesenvolvimento.
+            I Seminário Nacional<br />de Etnodesenvolvimento
           </h1>
           <p className="mt-10 text-2xl md:text-3xl font-light max-w-4xl text-ink/80 leading-snug">
             Ancestralidade, território e desenvolvimento para um Brasil plural
@@ -406,7 +406,7 @@ function Index() {
       {/* EIXOS */}
       <section className="max-w-7xl mx-auto px-6 py-20 md:py-28">
         <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">06 / Eixos Temáticos</div>
-        <h2 className="mt-3 text-4xl md:text-5xl text-ink mb-10">O que vamos debater.</h2>
+        <h2 className="mt-3 text-4xl md:text-5xl text-ink mb-10">O que vamos debater</h2>
         <div className="flex flex-wrap gap-2">
           {eixosTematicos.map((t) => (
             <span key={t} className="px-4 py-2 border border-ink/20 text-sm text-ink hover:bg-ink hover:text-cream transition rounded-full cursor-default">{t}</span>
@@ -419,7 +419,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">07 / Local</div>
-            <h2 className="mt-3 text-4xl md:text-5xl text-ink">Santa Maria, RS.</h2>
+            <h2 className="mt-3 text-4xl md:text-5xl text-ink">Santa Maria, RS</h2>
             <p className="mt-6 text-lg text-ink/70 leading-relaxed">
               Coração geográfico do Rio Grande do Sul, Santa Maria recebe o seminário em espaços com infraestrutura completa de acessibilidade.
             </p>
@@ -490,7 +490,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 text-sm">
           <div>
             <div className="font-bold text-cream text-base">I SNE · 2026</div>
-            <p className="mt-2">I Seminário Nacional de Etnodesenvolvimento — In Memoriam Jorge da Silva Nascimento.</p>
+            <p className="mt-2">I Seminário Nacional de Etnodesenvolvimento — In Memoriam Jorge da Silva Nascimento</p>
           </div>
           <div>
             <div className="font-bold text-cream uppercase tracking-widest text-xs mb-3">Contato</div>
@@ -498,7 +498,7 @@ function Index() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-cream/10 text-xs opacity-50">
-          © 2026 Etnodesenvolvimento. Todos os direitos reservados.
+        Copyright © 2026 Etnodesenvolvimento • Todos os direitos reservados.
         </div>
       </footer>
     </main>
