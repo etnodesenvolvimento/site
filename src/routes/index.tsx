@@ -107,12 +107,11 @@ const eixosTematicos = [
 
 function AgendaBlock({ b }: { b: Block }) {
   const span = b.rows === 1 ? "row-span-1" : b.rows === 2 ? "row-span-2" : "row-span-3";
-  const isHero = b.rows >= 2 && !b.subtitle;
   return (
-    <div className={`${trackBg[b.track]} ${span} relative p-4 md:p-5 flex flex-col justify-between rounded-sm transition-transform hover:scale-[1.02] hover:z-10 hover:shadow-xl cursor-default`}>
+    <div className={`${trackBg[b.track]} ${span} relative p-4 md:p-5 flex flex-col rounded-sm transition-transform hover:scale-[1.02] hover:z-10 hover:shadow-xl cursor-default`}>
       {b.time && <span className="text-xs font-bold uppercase tracking-wider opacity-70 text-ink">{b.time}</span>}
-      <div className="mt-auto">
-        <h4 className={`${isHero ? "text-3xl md:text-4xl font-extrabold" : "text-base md:text-lg font-bold"} text-ink leading-tight`}>{b.title}</h4>
+      <div className="mt-3">
+        <h4 className="text-base md:text-lg font-bold text-ink leading-tight">{b.title}</h4>
         {b.subtitle && <p className="mt-2 text-xs md:text-sm text-ink/80 leading-snug">{b.subtitle}</p>}
       </div>
     </div>
@@ -166,7 +165,7 @@ function SpeakerModal({ speaker, onClose }: { speaker: Speaker; onClose: () => v
 
         <div className="grid md:grid-cols-5">
           <div className="md:col-span-2 aspect-square md:aspect-auto md:h-full">
-            <img src={speaker.img} alt={speaker.name} className="w-full h-full object-cover object-top grayscale" />
+            <img src={speaker.img} alt={speaker.name} className="w-full h-full object-cover object-[50%_20%] grayscale" />
           </div>
           <div className="md:col-span-3 p-6 md:p-8">
             <div className="text-[10px] font-bold uppercase tracking-widest text-accent">{speaker.role}</div>
@@ -379,7 +378,7 @@ function Index() {
                 <img
                   src={s.img}
                   alt={s.name}
-                  className="absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-[50%_20%] grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-transparent transition-opacity duration-300 ${hovered === i ? "opacity-100" : "opacity-0"}`} />
