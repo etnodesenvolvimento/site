@@ -125,7 +125,7 @@ function DayColumn({ date, weekday, blocks }: { date: string; weekday: string; b
         <div className="text-4xl md:text-5xl font-bold text-ink">{date}</div>
         <div className="text-xs uppercase tracking-widest text-ink/60">Julho · {weekday}</div>
       </div>
-      <div className="grid grid-cols-1 gap-2 auto-rows-[80px]">
+      <div className="grid grid-cols-1 gap-2 auto-rows-[minmax(80px,auto)]">
         {blocks.map((b, i) => <AgendaBlock key={i} b={b} />)}
       </div>
     </div>
