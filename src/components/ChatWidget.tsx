@@ -15,7 +15,7 @@ export function ChatPill({ className = "" }: { className?: string }) {
         className={`group flex items-center gap-3 w-full max-w-xl bg-ink text-cream rounded-full pl-6 pr-2 py-2 shadow-lg hover:shadow-xl transition-all hover:scale-[1.01] ${className}`}
       >
         <span className="flex-1 text-left text-sm md:text-base opacity-90 truncate">
-          Inscreva-se e converse com a Luhara sobre ancestralidade…
+         Converse com a Luhara sobre ancestralidade…
         </span>
 
         <span className="bg-cream text-ink rounded-full w-9 h-9 flex items-center justify-center font-bold text-lg group-hover:bg-accent group-hover:text-cream transition">
@@ -100,7 +100,7 @@ function ChatModal({
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-ink/10 bg-cream">
           <div>
-            <div className="text-[10px] uppercase tracking-widest text-ink/50 font-bold">Luára · IA do SNE 2026</div>
+            <div className="text-[10px] uppercase tracking-widest text-ink/50 font-bold">Luhara · IA do SNE 2026</div>
             <div className="text-lg font-bold text-ink">Converse com a Luára</div>
           </div>
           <button onClick={onClose} className="w-9 h-9 rounded-full hover:bg-ink/10 text-ink text-xl flex items-center justify-center">×</button>
@@ -124,7 +124,7 @@ function ChatModal({
           ))}
           {loading && (
             <div className="flex justify-start">
-              <div className="bg-ink/5 text-ink/60 px-4 py-3 rounded-2xl text-sm">Pensando…</div>
+              <div className="bg-ink/5 text-ink/60 px-4 py-3 rounded-2xl text-sm">Luhara pensando…</div>
             </div>
           )}
         </div>
