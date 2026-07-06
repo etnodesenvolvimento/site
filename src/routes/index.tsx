@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import gilcianeImg from "@/assets/gilciane_neves.webp";
 import lucasImg from "@/assets/lucas_alberto_santos.webp";
 import pauloImg from "@/assets/paulo_azarias.webp";
+import jorjaoImg from "@/assets/jorjao.webp";
+import luharaImg from "@/assets/luhara.png";
 
 import { ChatPill } from "@/components/ChatWidget";
 
@@ -10,7 +12,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "I Seminário Nacional de Etnodesenvolvimento — Santa Maria-RS/Brasil 2026" },
-      { name: "description", content: "11 de julho de 2026 · FEICOOP — Santa Maria/RS. Ancestralidade, Território e Desenvolvimento para um Brasil Plural. In Memoriam Jorge da Silva Nascimento." },
+      { name: "description", content: "11 de julho de 2026 · FEICOOP — Santa Maria/RS. Ancestralidade, Território e Desenvolvimento para um Brasil Plural In Memoriam Jorge da Silva Nascimento." },
       { property: "og:title", content: "I Seminário Nacional de Etnodesenvolvimento" },
       { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Santa Maria-RS/Brasil, 11 de julho de 2026." },
     ],
@@ -261,12 +263,19 @@ function Index() {
             <a href="#inscricao" className="ml-auto bg-ink text-cream px-8 py-4 text-sm font-bold rounded-sm hover:opacity-90 transition">INSCREVA-SE GRATUITAMENTE →</a>
           </div>
 
-          <div className="mt-24 flex flex-col items-center text-center">
-            <div className="text-xs font-bold uppercase tracking-[0.3em] text-ink/50 mb-3">Nossa IA</div>
-            <div className="text-6xl md:text-8xl font-light text-ink mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic" }}>
-              Luhara
+          <div className="mt-24 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14 text-center md:text-left">
+            <img
+              src={luharaImg}
+              alt="Luhara"
+              className="w-40 h-40 md:w-56 md:h-56 object-contain flex-shrink-0"
+            />
+            <div className="flex flex-col items-center md:items-start">
+              <div className="text-xs font-bold uppercase tracking-[0.3em] text-ink/50 mb-3">Nossa IA</div>
+              <div className="text-6xl md:text-8xl font-light text-ink mb-8" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic" }}>
+                Luhara
+              </div>
+              <ChatPill className="mx-auto md:mx-0" />
             </div>
-            <ChatPill className="mx-auto" />
           </div>
         </div>
       </section>
@@ -288,19 +297,28 @@ function Index() {
 
       {/* HOMENAGEADO */}
       <section id="homenageado" className="bg-ink text-cream py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">02 / Homenageado</div>
-          <div className="mt-4 flex items-baseline gap-4 flex-wrap">
-            <h2 className="text-4xl md:text-6xl font-light">Jorge da Silva Nascimento</h2>
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 md:gap-16 items-center">
+          <div className="md:col-span-2">
+            <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">02 / Homenageado</div>
+            <div className="mt-4 flex items-baseline gap-4 flex-wrap">
+              <h2 className="text-4xl md:text-6xl font-light">Jorge da Silva Nascimento</h2>
+            </div>
+            <p className="mt-2 text-lg opacity-60 italic">"Jorjão"</p>
+            <h3 className="mt-8 text-2xl md:text-3xl font-bold">Quatro décadas pela igualdade.</h3>
+            <p className="mt-6 text-lg leading-relaxed opacity-80">
+              Educador popular, pesquisador social e liderança comunitária, Jorge dedicou mais de quarenta anos à promoção da igualdade racial, da educação popular e do fortalecimento das comunidades tradicionais.
+            </p>
+            <p className="mt-4 text-lg leading-relaxed opacity-80">
+              Idealizador de projetos de desenvolvimento territorial participativo, tornou-se referência nacional na defesa dos direitos humanos e do protagonismo das populações historicamente marginalizadas.
+            </p>
           </div>
-          <p className="mt-2 text-lg opacity-60 italic">"Jorjão"</p>
-          <h3 className="mt-8 text-2xl md:text-3xl font-bold">Quatro décadas pela igualdade.</h3>
-          <p className="mt-6 text-lg leading-relaxed opacity-80">
-            Educador popular, pesquisador social e liderança comunitária, Jorge dedicou mais de quarenta anos à promoção da igualdade racial, da educação popular e do fortalecimento das comunidades tradicionais.
-          </p>
-          <p className="mt-4 text-lg leading-relaxed opacity-80">
-            Idealizador de projetos de desenvolvimento territorial participativo, tornou-se referência nacional na defesa dos direitos humanos e do protagonismo das populações historicamente marginalizadas.
-          </p>
+          <div className="flex justify-center md:justify-end">
+            <img
+              src={jorjaoImg}
+              alt="Jorge da Silva Nascimento (Jorjão)"
+              className="w-56 h-56 md:w-72 md:h-72 rounded-full object-cover shadow-2xl border-4 border-cream/10"
+            />
+          </div>
         </div>
       </section>
 
