@@ -36,10 +36,10 @@ const trackBg: Record<Track, string> = {
 const day1: Block[] = [
   { time: "13h30", title: "Acolhimento", track: 4, rows: 1 },
   { time: "14h", title: "Abertura", subtitle: "Composição da mesa de autoridades, organização da FEICOOP e movimentos sociais", track: 5, rows: 1 },
-  { time: "14h30", title: "Painel 1: Mulheres do FESPOPE e o Etnodesenvolvimento", subtitle: "Economia Popular Solidária como Caminho de Autonomia, Identidade e Bem Viver · Gilciane Neves", track: 1, rows: 3 },
+  { time: "14h30", title: "Painel 1: Mulheres do FESPOPE e o Etnodesenvolvimento", subtitle: "Economia Popular Solidária como Caminho de Autonomia, Identidade e Bem Viver · Gilciane Neves", track: 1, rows: 2 },
   { time: "15h", title: "Painel 2: Desafios decoloniais do Etnodesenvolvimento em um mundo em transformação", subtitle: "Lucas Alberto Santos", track: 2, rows: 2 },
   { time: "15h45", title: "Coffee Break", track: 2, rows: 1 },
-  { time: "16h", title: "Feijão de Ogum: Feira do Etnodesenvolvimento e Educação Financeira Afrocentrada", subtitle: "Experiências de Organização e Autonomia do Povo de Terreiro · Paulo Azarias", track: 3, rows: 3 },
+  { time: "16h", title: "Feijão de Ogum: Feira do Etnodesenvolvimento e Educação Financeira Afrocentrada", subtitle: "Experiências de Organização e Autonomia do Povo de Terreiro · Paulo Azarias", track: 3, rows: 2 },
   { time: "16h30", title: "Conexão, encaminhamentos e encerramento", track: 5, rows: 1 },
 ];
 
@@ -166,7 +166,7 @@ function SpeakerModal({ speaker, onClose }: { speaker: Speaker; onClose: () => v
 
         <div className="grid md:grid-cols-5">
           <div className="md:col-span-2 aspect-square md:aspect-auto md:h-full">
-            <img src={speaker.img} alt={speaker.name} className="w-full h-full object-cover grayscale" />
+            <img src={speaker.img} alt={speaker.name} className="w-full h-full object-cover object-top grayscale" />
           </div>
           <div className="md:col-span-3 p-6 md:p-8">
             <div className="text-[10px] font-bold uppercase tracking-widest text-accent">{speaker.role}</div>
@@ -263,7 +263,7 @@ function Index() {
             <a href="#inscricao" className="ml-auto bg-ink text-cream px-8 py-4 text-sm font-bold rounded-sm hover:opacity-90 transition">INSCREVA-SE GRATUITAMENTE →</a>
           </div>
 
-          <div className="mt-24 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14 text-center md:text-left">
+          <div className="mt-36 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14 text-center md:text-left">
             <img
               src={luharaImg}
               alt="Luhara"
@@ -316,7 +316,7 @@ function Index() {
             <img
               src={jorjaoImg}
               alt="Jorge da Silva Nascimento (Jorjão)"
-              className="w-56 h-56 md:w-72 md:h-72 rounded-full object-cover shadow-2xl border-4 border-cream/10"
+              className="w-56 h-56 md:w-72 md:h-72 rounded-full object-cover object-top shadow-2xl border-4 border-cream/10"
             />
           </div>
         </div>
@@ -379,7 +379,7 @@ function Index() {
                 <img
                   src={s.img}
                   alt={s.name}
-                  className="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-transparent transition-opacity duration-300 ${hovered === i ? "opacity-100" : "opacity-0"}`} />
