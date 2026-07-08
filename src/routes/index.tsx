@@ -200,7 +200,7 @@ function Index() {
       "Instituição / Organização": data.get("org") || "Não informado",
       "Categoria": data.get("cat") || "Não informado",
       "Cidade / Estado": data.get("cidade") || "Não informado",
-      _subject: "Nova inscrição — I Seminário Nacional de Etnodesenvolvimento",
+      _subject: "Nova inscrição — Seminário Nacional de Etnodesenvolvimento",
       _template: "table",
     };
 
@@ -242,13 +242,13 @@ function Index() {
 
       {/* HERO */}
       <section className="bg-cream text-ink">
-        <div className="text-center pt-6 pb-2 text-sm md:text-base font-light text-ink/60">
+        <div className="text-center pt-6 pb-2 text-2xl md:text-3xl font-light text-ink/80">
           Projeto Territórios Sustentáveis Fase II
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-20 md:pb-32 pt-6 md:pt-10">
           <h1 className="text-[2.75rem] md:text-[5.5rem] lg:text-[6.5rem] leading-[1.02] tracking-tight max-w-6xl font-light">
-            <span className="block text-xs font-bold uppercase tracking-[0.3em] text-ink/60 mb-3">In Memoriam Jorge da Silva Nascimento (Jorjão)</span>
-            I Seminário Nacional<br />de Etnodesenvolvimento
+            <span className="block text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] text-ink/50 mb-2">In Memoriam Jorge da Silva Nascimento (Jorjão)</span>
+             Seminário Nacional<br />de Etnodesenvolvimento
           </h1>
           <p className="mt-10 text-2xl md:text-3xl font-light max-w-4xl text-ink/80 leading-snug">
             Ancestralidade, território e desenvolvimento para um Brasil plural
