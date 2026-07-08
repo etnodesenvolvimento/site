@@ -5,15 +5,16 @@ import lucasImg from "@/assets/lucas_alberto_santos.webp";
 import pauloImg from "@/assets/paulo_azarias.webp";
 import jorjaoImg from "@/assets/jorjao.webp";
 import luharaImg from "@/assets/luhara.png";
+import faixaImg from "@/assets/faixa.webp";
 
 import { ChatPill } from "@/components/ChatWidget";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "I Seminário Nacional de Etnodesenvolvimento — Santa Maria-RS/Brasil 2026" },
+      { title: "Seminário Nacional de Etnodesenvolvimento — Santa Maria-RS/Brasil 2026" },
       { name: "description", content: "11 de julho de 2026 · FEICOOP — Santa Maria/RS Ancestralidade, Território e Desenvolvimento para um Brasil Plural In Memoriam Jorge da Silva Nascimento." },
-      { property: "og:title", content: "I Seminário Nacional de Etnodesenvolvimento" },
+      { property: "og:title", content: "Seminário Nacional de Etnodesenvolvimento" },
       { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Santa Maria-RS/Brasil, 11 de julho de 2026" },
     ],
   }),
@@ -243,7 +244,7 @@ function Index() {
       <section className="bg-cream text-ink">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-32">
           <div className="text-xs font-bold uppercase tracking-[0.3em] text-ink/60 mb-2">In Memoriam Jorge da Silva Nascimento (Jorjão)</div>
-          <div className="text-xs font-semibold tracking-wide mb-10" style={{ color: "#d4c19c" }}>Projeto Territórios Sustentáveis Fase II</div>
+          <div className="text-2xl md:text-3xl font-light text-ink/80 leading-snug text-center mb-10">Projeto Territórios Sustentáveis Fase II</div>
           <h1 className="text-[2.75rem] md:text-[5.5rem] lg:text-[6.5rem] leading-[1.02] tracking-tight max-w-6xl font-light">
             I Seminário Nacional<br />de Etnodesenvolvimento
           </h1>
@@ -260,6 +261,14 @@ function Index() {
               <div className="text-xl font-bold mt-1">FEICOOP · Santa Maria — RS/Brasil</div>
             </div>
             <a href="#inscricao" className="ml-auto bg-ink text-cream px-8 py-4 text-sm font-bold rounded-sm hover:opacity-90 transition">INSCREVA-SE GRATUITAMENTE →</a>
+          </div>
+
+          <div className="mt-16 flex justify-center">
+            <img
+              src={faixaImg}
+              alt="Apoio, Realização e Patrocínio"
+              className="w-full max-w-6xl h-auto object-contain"
+            />
           </div>
 
           <div className="mt-36 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14 text-center md:text-left">
@@ -490,7 +499,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 text-sm">
           <div>
             <div className="font-bold text-cream text-base">I SNE · 2026</div>
-            <p className="mt-2">I Seminário Nacional de Etnodesenvolvimento — In Memoriam Jorge da Silva Nascimento</p>
+            <p className="mt-2">Seminário Nacional de Etnodesenvolvimento — In Memoriam Jorge da Silva Nascimento</p>
           </div>
           <div>
             <div className="font-bold text-cream uppercase tracking-widest text-xs mb-3">Contato</div>
