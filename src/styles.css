@@ -42,8 +42,8 @@
 :root {
   --radius: 0.25rem;
   /* Editorial palette from references */
-  --cream: oklch(0.88 0.018 15);   /* dusty pink */
-  --ink: oklch(0.22 0.018 25);     /* dark plum/brown */
+  --cream: oklch(0.88 0.018 15); /* dusty pink */
+  --ink: oklch(0.22 0.018 25); /* dark plum/brown */
 
   --background: oklch(0.88 0.018 15);
   --foreground: oklch(0.22 0.018 25);
@@ -74,7 +74,9 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -82,7 +84,10 @@
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: -0.02em;

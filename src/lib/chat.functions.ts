@@ -60,11 +60,14 @@ export const chatWithAI = createServerFn({ method: "POST" })
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${key}`,
+        Authorization: `Bearer ${key}`,
       },
       body: JSON.stringify({
         model: MODEL,
-        messages: [{ role: "system", content: SYSTEM_PROMPT }, ...data.messages],
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...data.messages,
+        ],
       }),
     });
 
