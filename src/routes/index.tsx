@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import gilcianeImg from "@/assets/gilciane_neves.webp";
 import lucasImg from "@/assets/lucas_alberto_santos.webp";
 import pauloImg from "@/assets/paulo_azarias.webp";
@@ -12,10 +12,10 @@ import { ChatPill } from "@/components/ChatWidget";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Seminário Nacional de Etnodesenvolvimento — Santa Maria-RS/Brasil 2026" },
-      { name: "description", content: "11 de julho de 2026 · FEICOOP — Santa Maria/RS Ancestralidade, Território e Desenvolvimento para um Brasil Plural In Memoriam Jorge da Silva Nascimento." },
+      { title: "Seminário Nacional de Etnodesenvolvimento — Região Metropolitana de Porto Alegre-RS/Brasil 2026" },
+      { name: "description", content: "Setembro de 2026 · Região Metropolitana de Porto Alegre/RS — Ancestralidade, Território e Desenvolvimento para um Brasil Plural. In Memoriam Jorge da Silva Nascimento." },
       { property: "og:title", content: "Seminário Nacional de Etnodesenvolvimento" },
-      { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Santa Maria-RS/Brasil, 11 de julho de 2026" },
+      { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Região Metropolitana de Porto Alegre-RS/Brasil, Setembro de 2026" },
     ],
   }),
   component: Index,
@@ -35,61 +35,33 @@ const trackBg: Record<Track, string> = {
 };
 
 const day1: Block[] = [
-  { time: "13h30", title: "Acolhimento", track: 4, rows: 1 },
-  { time: "14h", title: "Abertura", subtitle: "Composição da mesa de autoridades, organização da FEICOOP e movimentos sociais", track: 5, rows: 1 },
-  { time: "14h30", title: "Painel 1: Mulheres do FESPOPE e o Etnodesenvolvimento", subtitle: "Economia Popular Solidária como Caminho de Autonomia, Identidade e Bem Viver · Gilciane Neves", track: 1, rows: 2 },
-  { time: "15h", title: "Painel 2: Desafios decoloniais do Etnodesenvolvimento em um mundo em transformação", subtitle: "Lucas Alberto Santos", track: 2, rows: 2 },
-  { time: "15h45", title: "Coffee Break", track: 2, rows: 1 },
-  { time: "16h", title: "Feijão de Ogum: Feira do Etnodesenvolvimento e Educação Financeira Afrocentrada", subtitle: "Experiências de Organização e Autonomia do Povo de Terreiro · Paulo Azarias", track: 3, rows: 2 },
-  { time: "16h30", title: "Conexão, encaminhamentos e encerramento", track: 5, rows: 1 },
+  { title: “Em breve”, track: 4, rows: 1 },
+  { title: “Em breve“, track: 5, rows: 1 },
+  { title: “Em breve”, track: 1, rows: 2 },
+  { title: "Em breve", track: 2, rows: 2 },
+  { title: "Em breve", track: 2, rows: 1 },
+  { title: “Em breve”, track: 3, rows: 2 },
+  { title: “Em breve”, track: 5, rows: 1 },
 ];
 
 type Speaker = {
-  name: string;
-  role: string;
-  org: string;
-  miniBio: string;
-  fullBio: string[];
+  
   img: string;
 };
 
 const speakers: Speaker[] = [
   {
-    name: "Gilciane Neves",
-    role: "Gil Neves",
-    org: "Fundadora do FESPOPE-RS",
-    miniBio: "Militante da Economia Popular Solidária, fundadora do FESPOPE-RS e integrante de redes e coletivos de mulheres negras. Atua como educadora popular, articuladora social e palestrante nas áreas de economia solidária, igualdade racial, feminismo negro e comércio justo.",
-    fullBio: [
-      "Gilciane Neves, gaúcha de 49 anos, conhecida como Gil Neves, militante do Movimento Popular de Economia Solidária e uma das principais articuladoras da economia popular solidária protagonizada por mulheres negras no Rio Grande do Sul. É fundadora do Fórum Estadual das Mulheres Negras Trabalhadoras da Economia Popular Solidária (FESPOPE-RS) e integra os coletivos feministas negros de economia solidária D'versas e Afro Aya.",
-      "Também é integrante da Rede Ubuntu de Cooperação Solidária (CAMP), da Rede de Comércio Justo e Solidário da Fundação Luterana de Diaconia (FLD), sócia da Casa da Mulher Trabalhadora (CAMTRA-RJ) e da Associação Cultural Quilombo do Sopapo.",
-      "Graduanda em Administração Pública e Social pela Escola de Administração da Universidade Federal do Rio Grande do Sul (UFRGS), possui formação técnica em Administração pelo Instituto Federal do Rio Grande do Sul (IFRS), além de qualificação como organizadora de eventos e educadora financeira.",
-      "Ao longo de sua trajetória, atua como educadora popular, assessora técnica, articuladora social e coordenadora de projetos voltados à economia popular solidária, ao fortalecimento do protagonismo das mulheres negras, à promoção da igualdade racial e à formação de juventudes e comunidades.",
-    ],
+   
+    
     img: gilcianeImg,
   },
   {
-    name: "Lucas Alberto Santos",
-    role: "Cientista da Computação",
-    org: "Arquiteto de Software · Serpro",
-    miniBio: "Cientista da computação pela UFBA, pós-graduado em Gestão Pública pela UnB e mestrando na UFRGS, onde pesquisa computação urbana em cidades inteligentes. Atua como arquiteto de software no Serpro, com experiência em IA, ciência de dados, desenvolvimento full-stack e Web3.",
-    fullBio: [
-      "Lucas Alberto Santos, baiano de 46 anos, é cientista da computação pela Universidade Federal da Bahia (UFBA), pós-graduado em Gestão Pública pela Universidade de Brasília (UnB) e mestrando no Instituto de Informática da Universidade Federal do Rio Grande do Sul (UFRGS), onde desenvolve pesquisa na área de computação urbana aplicada a cidades inteligentes.",
-      "Atua como arquiteto de software no Serpro, com experiência em desenvolvimento full-stack, ciência de dados, inteligência artificial (IA) e Web3.",
-      "Também é líder do Grupo de Trabalho (GT) de Cultura Digital de Matriz Africana da Rede Afroambiental e membro do Ponto de Cultura Cine Kafuné, onde pesquisa tecnologias sustentáveis voltadas ao audiovisual.",
-    ],
+    
+   
     img: lucasImg,
   },
   {
-    name: "Paulo Azarias",
-    role: "Militante do MNU",
-    org: "Fundador do Feijão de Ogum",
-    miniBio: "Militante histórico do Movimento Negro Unificado (MNU), diretor do COMPIR de Juiz de Fora (MG) e fundador do Feijão de Ogum. Atua há mais de 30 anos na promoção da igualdade racial, no combate ao racismo e na defesa das religiões de matriz africana.",
-    fullBio: [
-      "Paulo Azarias, mineiro de 67 anos, militante histórico do Movimento Negro Unificado (MNU) e uma das principais lideranças na construção das políticas de promoção da igualdade racial em Juiz de Fora (MG). Há mais de três décadas, atua no enfrentamento ao racismo estrutural e na promoção dos direitos da população negra, com uma trajetória marcada pela defesa do território, da ancestralidade e da justiça social.",
-      "Servidor público na Secretaria de Igualdade Racial de Juiz de Fora, é diretor do Conselho Municipal de Promoção da Igualdade Racial (COMPIR) e coordenador do Movimento Negro Unificado (MNU) na região da Zona da Mata.",
-      "Em 1998, idealizou o Feijão de Ogum, iniciativa criada como espaço de acolhimento político-religioso para o povo de axé, conectando espiritualidade, cultura e ação direta. Atualmente, o projeto se consolida como Instituto Feijão de Ogum, dedicado à formação, ao acolhimento e à articulação em educação popular, letramento racial e preservação das tradições afro-brasileiras, com foco na juventude negra e periférica.",
-      "É palestrante em fóruns, seminários, rodas de conversa, encontros acadêmicos e articulações inter-religiosas, abordando temas como luta antirracista no poder público, raça e território, intolerância religiosa, memória e ancestralidade negra, formação política para juventudes periféricas e resistência das casas de axé.",
-    ],
+    
     img: pauloImg,
   },
 ];
@@ -124,7 +96,7 @@ function DayColumn({ date, weekday, blocks }: { date: string; weekday: string; b
     <div className="flex-1 min-w-0">
       <div className="mb-3 border-b-2 border-ink/20 pb-2">
         <div className="text-4xl md:text-5xl font-bold text-ink">{date}</div>
-        <div className="text-xs uppercase tracking-widest text-ink/60">Julho · {weekday}</div>
+        <div className="text-xs uppercase tracking-widest text-ink/60">Setembro · {weekday}</div>
       </div>
       <div className="grid grid-cols-1 gap-2 auto-rows-[minmax(80px,auto)]">
         {blocks.map((b, i) => <AgendaBlock key={i} b={b} />)}
@@ -133,58 +105,8 @@ function DayColumn({ date, weekday, blocks }: { date: string; weekday: string; b
   );
 }
 
-function SpeakerModal({ speaker, onClose }: { speaker: Speaker; onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/80 backdrop-blur-sm p-4 md:p-8"
-      onClick={onClose}
-      role="dialog"
-      aria-modal="true"
-      aria-label={`Biografia de ${speaker.name}`}
-    >
-      <div
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto bg-cream rounded-sm shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          aria-label="Fechar"
-          className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-ink text-cream hover:opacity-80 transition text-lg font-bold z-10"
-        >
-          ×
-        </button>
-
-        <div className="grid md:grid-cols-5">
-          <div className="md:col-span-2 aspect-square md:aspect-auto md:h-full">
-            <img src={speaker.img} alt={speaker.name} className="w-full h-full object-cover object-[50%_20%] grayscale" />
-          </div>
-          <div className="md:col-span-3 p-6 md:p-8">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-accent">{speaker.role}</div>
-            <h3 className="mt-1 text-2xl md:text-3xl font-bold text-ink leading-tight">{speaker.name}</h3>
-            <div className="mt-1 text-sm text-ink/60">{speaker.org}</div>
-            <div className="mt-5 space-y-4 text-sm md:text-base leading-relaxed text-ink/80">
-              {speaker.fullBio.map((p, i) => <p key={i}>{p}</p>)}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function Index() {
   const [hovered, setHovered] = useState<number | null>(null);
-  const [selectedSpeaker, setSelectedSpeaker] = useState<number | null>(null);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   async function handleInscricao(e: React.FormEvent<HTMLFormElement>) {
@@ -256,11 +178,11 @@ function Index() {
           <div className="mt-16 flex flex-wrap gap-10 items-end">
             <div>
               <div className="text-xs uppercase tracking-widest text-ink/50">Quando</div>
-              <div className="text-xl font-bold mt-1">11 de Julho · 2026</div>
+              <div className="text-xl font-bold mt-1">Em Setembro · 2026</div>
             </div>
             <div>
               <div className="text-xs uppercase tracking-widest text-ink/50">Onde</div>
-              <div className="text-xl font-bold mt-1">FEICOOP · Santa Maria — RS/Brasil</div>
+              <div className="text-xl font-bold mt-1">Região Metropolitana de Porto Alegre — RS/Brasil</div>
             </div>
             <a href="#inscricao" className="ml-auto bg-ink text-cream px-8 py-4 text-sm font-bold rounded-sm hover:opacity-90 transition">INSCREVA-SE GRATUITAMENTE →</a>
           </div>
@@ -361,7 +283,7 @@ function Index() {
           </div>
 
           <div className="max-w-3xl mx-auto">
-            <DayColumn date="11" weekday="Sábado" blocks={day1} />
+            <DayColumn date="Em breve" weekday="data a definir" blocks={day1} />
           </div>
         </div>
       </section>
@@ -371,20 +293,15 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">05 / Convidados</div>
           <h2 className="mt-3 text-4xl md:text-5xl mb-3">Quem estará com a gente</h2>
-          <p className="mb-12 text-sm opacity-60">Passe o mouse para um resumo · clique no card para ler a biografia completa.</p>
+          <p className="mb-12 text-sm opacity-60">Em breve divulgaremos nossos convidados.</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {speakers.map((s, i) => (
               <div
                 key={i}
-                className="group relative aspect-[3/4] overflow-hidden rounded-sm bg-ink cursor-pointer"
+                className="group relative aspect-[3/4] overflow-hidden rounded-sm bg-ink"
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
-                onClick={() => setSelectedSpeaker(i)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === "Enter") setSelectedSpeaker(i); }}
-                aria-label={`Ver biografia completa de ${s.name}`}
               >
                 <img
                   src={s.img}
@@ -397,8 +314,6 @@ function Index() {
                   <div className="text-[10px] uppercase tracking-widest text-accent font-bold">{s.role}</div>
                   <div className="mt-1 text-lg font-bold leading-tight">{s.name}</div>
                   <div className="mt-1 text-xs opacity-80">{s.org}</div>
-                  <p className="mt-2 text-xs leading-snug opacity-90">{s.miniBio}</p>
-                  <div className="mt-3 text-[10px] font-bold uppercase tracking-widest text-accent">Clique para ler mais →</div>
                 </div>
                 <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/90 to-transparent transition-opacity ${hovered === i ? "opacity-0" : "opacity-100"}`}>
                   <div className="text-sm font-bold text-cream leading-tight">{s.name}</div>
@@ -409,10 +324,6 @@ function Index() {
           </div>
         </div>
       </section>
-
-      {selectedSpeaker !== null && (
-        <SpeakerModal speaker={speakers[selectedSpeaker]} onClose={() => setSelectedSpeaker(null)} />
-      )}
 
       {/* EIXOS */}
       <section className="max-w-7xl mx-auto px-6 py-20 md:py-28">
@@ -430,20 +341,20 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
           <div>
             <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">07 / Local</div>
-            <h2 className="mt-3 text-4xl md:text-5xl text-ink">Santa Maria, RS</h2>
+            <h2 className="mt-3 text-4xl md:text-5xl text-ink">Região Metropolitana de Porto Alegre, RS</h2>
             <p className="mt-6 text-lg text-ink/70 leading-relaxed">
-              Coração geográfico do Rio Grande do Sul, Santa Maria recebe o seminário em espaços com infraestrutura completa de acessibilidade.
+              O seminário acontece na Região Metropolitana de Porto Alegre, em espaços com infraestrutura completa de acessibilidade.
             </p>
             <ul className="mt-6 space-y-3 text-ink/80">
               <li className="flex gap-3"><span className="text-accent font-bold">→</span> Espaços e banheiros acessíveis</li>
               <li className="flex gap-3"><span className="text-accent font-bold">→</span> Certificado de participação do seminário</li>
-              <li className="flex gap-3"><span className="text-accent font-bold">→</span> Evento 100% presencial · FEICOOP</li>
+              <li className="flex gap-3"><span className="text-accent font-bold">→</span> Evento 100% presencial</li>
             </ul>
           </div>
           <div className="aspect-square md:aspect-[4/5] rounded-sm overflow-hidden border-2 border-ink/10 shadow-xl">
             <iframe
-              title="Mapa Santa Maria/RS"
-              src="https://www.google.com/maps?q=FEICOP+Santa+Maria+RS&output=embed"
+              title="Mapa Região Metropolitana de Porto Alegre/RS"
+              src="https://www.google.com/maps?q=Porto+Alegre+RS&output=embed"
               className="w-full h-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
