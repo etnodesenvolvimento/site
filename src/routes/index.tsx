@@ -292,7 +292,7 @@ function Index() {
                 <img
                   src={s.img}
                   alt="Convidado do seminário"
-                  className="absolute inset-0 w-full h-full object-cover object-[50%_20%] grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-[50%_20%] transition-all duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
               </div>
