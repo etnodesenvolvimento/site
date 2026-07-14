@@ -156,7 +156,7 @@ function Index() {
           Projeto Territórios Sustentáveis Fase II
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-20 md:pb-32 pt-6 md:pt-10">
-          <h1 className="text-[2.75rem] md:text-[5.5rem] lg:text-[6.5rem] leading-[1.02] tracking-tight max-w-6xl font-light">
+          <h1 className="text-[2.1rem] sm:text-[3.2rem] md:text-[5.5rem] lg:text-[6.5rem] leading-[1.1] tracking-tight max-w-6xl font-light break-words">
             <span className="block text-[9px] md:text-[10px] font-bold uppercase tracking-[0.25em] text-ink/50 mb-2">In Memoriam Jorge da Silva Nascimento (Jorjão)</span>
              Seminário Nacional<br />de Etnodesenvolvimento
           </h1>
@@ -288,8 +288,6 @@ function Index() {
               <div
                 key={i}
                 className="group relative aspect-[3/4] overflow-hidden rounded-sm bg-ink"
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
               >
                 <img
                   src={s.img}
