@@ -35,35 +35,23 @@ const trackBg: Record<Track, string> = {
 };
 
 const day1: Block[] = [
-  { title: “Em breve”, track: 4, rows: 1 },
-  { title: “Em breve“, track: 5, rows: 1 },
-  { title: “Em breve”, track: 1, rows: 2 },
+  { title: "Em breve", track: 4, rows: 1 },
+  { title: "Em breve", track: 5, rows: 1 },
+  { title: "Em breve", track: 1, rows: 2 },
   { title: "Em breve", track: 2, rows: 2 },
   { title: "Em breve", track: 2, rows: 1 },
-  { title: “Em breve”, track: 3, rows: 2 },
-  { title: “Em breve”, track: 5, rows: 1 },
+  { title: "Em breve", track: 3, rows: 2 },
+  { title: "Em breve", track: 5, rows: 1 },
 ];
 
 type Speaker = {
-  
   img: string;
 };
 
 const speakers: Speaker[] = [
-  {
-   
-    
-    img: gilcianeImg,
-  },
-  {
-    
-   
-    img: lucasImg,
-  },
-  {
-    
-    img: pauloImg,
-  },
+  { img: gilcianeImg },
+  { img: lucasImg },
+  { img: pauloImg },
 ];
 
 const eixosTematicos = [
@@ -293,7 +281,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">05 / Convidados</div>
           <h2 className="mt-3 text-4xl md:text-5xl mb-3">Quem estará com a gente</h2>
-          <p className="mb-12 text-sm opacity-60">Em breve divulgaremos nossos convidados.</p>
+          <p className="mb-12 text-sm opacity-60">Em breve divulgaremos nossos palestrantes.</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {speakers.map((s, i) => (
@@ -305,20 +293,10 @@ function Index() {
               >
                 <img
                   src={s.img}
-                  alt={s.name}
+                  alt="Convidado do seminário"
                   className="absolute inset-0 w-full h-full object-cover object-[50%_20%] grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-transparent transition-opacity duration-300 ${hovered === i ? "opacity-100" : "opacity-0"}`} />
-                <div className={`absolute inset-0 p-5 flex flex-col justify-end text-cream transition-all duration-300 ${hovered === i ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}>
-                  <div className="text-[10px] uppercase tracking-widest text-accent font-bold">{s.role}</div>
-                  <div className="mt-1 text-lg font-bold leading-tight">{s.name}</div>
-                  <div className="mt-1 text-xs opacity-80">{s.org}</div>
-                </div>
-                <div className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/90 to-transparent transition-opacity ${hovered === i ? "opacity-0" : "opacity-100"}`}>
-                  <div className="text-sm font-bold text-cream leading-tight">{s.name}</div>
-                  <div className="text-[11px] text-cream/60 mt-0.5">{s.org}</div>
-                </div>
               </div>
             ))}
           </div>
@@ -420,7 +398,7 @@ function Index() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-cream/10 text-xs opacity-50">
-        Copyright © 2026 Etnodesenvolvimento • Todos os direitos reservados.
+          Copyright © 2026 Etnodesenvolvimento • Todos os direitos reservados.
         </div>
       </footer>
     </main>
