@@ -152,7 +152,7 @@ function Index() {
 
       {/* HERO */}
       <section className="bg-cream text-ink">
-        <div className="text-center pt-6 pb-2 text-2xl md:text-3xl font-light text-ink/80">
+        <div className="text-center pt-6 pb-2 px-4 text-xl sm:text-2xl md:text-3xl font-light text-ink/80 break-words">
           Projeto Territórios Sustentáveis Fase II
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-20 md:pb-32 pt-6 md:pt-10">
