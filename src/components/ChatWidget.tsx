@@ -101,7 +101,7 @@ function ChatModal({
         <div className="flex items-center justify-between px-5 py-4 border-b border-ink/10 bg-cream">
           <div>
             <div className="text-[10px] uppercase tracking-widest text-ink/50 font-bold">Luhara · IA do SNE 2026</div>
-            <div className="text-lg font-bold text-ink">Converse com a Luára</div>
+            <div className="text-lg font-bold text-ink">Converse com a Luhara</div>
           </div>
           <button onClick={onClose} className="w-9 h-9 rounded-full hover:bg-ink/10 text-ink text-xl flex items-center justify-center">×</button>
         </div>
