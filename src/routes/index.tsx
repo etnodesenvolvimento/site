@@ -13,9 +13,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Seminário Nacional de Etnodesenvolvimento — Região Metropolitana de Porto Alegre-RS/Brasil 2026" },
-      { name: "description", content: "Setembro de 2026 · Região Metropolitana de Porto Alegre/RS — Ancestralidade, Território e Desenvolvimento para um Brasil Plural. In Memoriam Jorge da Silva Nascimento." },
+      { name: "description", content: "Outubro de 2026 · Região Metropolitana de Porto Alegre/RS — Ancestralidade, Território e Desenvolvimento para um Brasil Plural. In Memoriam Jorge da Silva Nascimento." },
       { property: "og:title", content: "Seminário Nacional de Etnodesenvolvimento" },
-      { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Região Metropolitana de Porto Alegre-RS/Brasil, Setembro de 2026" },
+      { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Região Metropolitana de Porto Alegre-RS/Brasil, Outubro de 2026" },
     ],
   }),
   component: Index,
@@ -95,8 +95,7 @@ function CookieConsent() {
   return (
     <div className="fixed bottom-0 inset-x-0 z-[200] bg-ink text-cream px-5 py-4 flex flex-col md:flex-row items-center gap-4 shadow-2xl">
       <p className="text-sm leading-relaxed flex-1">
-        Usamos cookies para entender como o site é usado (Google Analytics e
-        Cloudflare Analytics). Você pode aceitar apenas o essencial ou tudo.
+        Usamos cookies para entender como o site é usado. Você pode aceitar apenas o essencial ou tudo.
         Saiba mais na nossa{" "}
         <a href="/privacidade" className="underline">
           política de privacidade
