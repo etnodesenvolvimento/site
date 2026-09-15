@@ -51,6 +51,32 @@ Paulo Azarias -Fundador do Feijão de Ogum, Militante histórico do Movimento Ne
 
 type ChatMessage = { role: "user" | "assistant" | "system"; content: string };
 
+// ===== Aviso por e-mail (Resend) a cada nova conversa =====
+
+async function notifyNewConversation() {
+  const key = process.env.RESEND_API_KEY;
+  const to = process.env.NOTIFY_EMAIL;
+  if (!key || !to) return;
+
+  try {
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${key}`,
+      },
+      body: JSON.stringify({
+        from: "Luhara <onboarding@resend.dev>",
+        to: [to],
+        subject: "Nova conversa iniciada com a Luhara",
+        text: `Uma nova conversa começou em ${new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}.`,
+      }),
+    });
+  } catch (e) {
+    console.error("Falha ao notificar nova conversa:", e);
+  }
+}
+
 export const chatWithAI = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => {
     const d = data as { messages: ChatMessage[] };
@@ -60,6 +86,10 @@ export const chatWithAI = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const key = process.env.OPENAI_API_KEY;
     if (!key) throw new Error("Missing OPENAI_API_KEY");
+
+    if (data.messages.length === 2) {
+      notifyNewConversation();
+    }
 
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
