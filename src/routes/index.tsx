@@ -24,15 +24,15 @@ export const Route = createFileRoute("/")({
 const INSCRICAO_EMAIL = "etnodesenvolvimento1@gmail.com";
 
 // ======================================================================
-// TUDO DE ANALYTICS / LGPD / LOG DE ACESSO, direto aqui no index.tsx
+// ANALYTICS / LGPD (Google Analytics + Cloudflare Web Analytics)
 // ======================================================================
 
 const CONSENT_KEY = "sne_consent_v1";
 const POLICY_VERSION = "2026-09-14";
 
-const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
-const CF_TOKEN = import.meta.env.VITE_CLOUDFLARE_ANALYTICS_TOKEN as string | undefined;
-const LOG_URL = import.meta.env.VITE_ACCESS_LOG_URL as string | undefined;
+// IDs públicos do Google Analytics e Cloudflare (não são segredos)
+const GA_ID = "G-6FB8RBBRSG";
+const CF_TOKEN = "79bb28947dee4b0ca724db534135ebdc";
 
 type Consent = { necessary: true; analytics: boolean; policyVersion: string; ts: number };
 
@@ -55,21 +55,11 @@ function saveConsent(analytics: boolean) {
   window.dispatchEvent(new CustomEvent("sne-consent-changed"));
 }
 
-function getVisitorId(): string {
-  if (typeof window === "undefined") return "server";
-  let id = localStorage.getItem("sne_visitor_id");
-  if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem("sne_visitor_id", id);
-  }
-  return id;
-}
-
 function loadAnalyticsIfConsented() {
   if (typeof window === "undefined" || !getConsent()?.analytics) return;
 
   // Google Analytics 4
-  if (GA_ID && !document.getElementById("ga4-script")) {
+  if (!document.getElementById("ga4-script")) {
     const script = document.createElement("script");
     script.id = "ga4-script";
     script.async = true;
@@ -86,7 +76,7 @@ function loadAnalyticsIfConsented() {
   }
 
   // Cloudflare Web Analytics
-  if (CF_TOKEN && !document.getElementById("cf-analytics")) {
+  if (!document.getElementById("cf-analytics")) {
     const script = document.createElement("script");
     script.id = "cf-analytics";
     script.defer = true;
@@ -94,21 +84,6 @@ function loadAnalyticsIfConsented() {
     script.setAttribute("data-cf-beacon", JSON.stringify({ token: CF_TOKEN }));
     document.body.appendChild(script);
   }
-}
-
-function logPageview(path: string) {
-  if (typeof window === "undefined" || !LOG_URL) return;
-  const payload = {
-    type: "pageview",
-    visitorId: getVisitorId(),
-    path,
-    referrer: document.referrer || "",
-    userAgent: navigator.userAgent,
-    timestamp: new Date().toISOString(),
-  };
-  const body = JSON.stringify(payload);
-  const sent = navigator.sendBeacon?.(LOG_URL, new Blob([body], { type: "text/plain;charset=UTF-8" }));
-  if (!sent) fetch(LOG_URL, { method: "POST", body, keepalive: true }).catch(() => {});
 }
 
 function CookieConsent() {
@@ -123,11 +98,9 @@ function CookieConsent() {
   return (
     <div className="fixed bottom-0 inset-x-0 z-[200] bg-ink text-cream px-5 py-4 flex flex-col md:flex-row items-center gap-4 shadow-2xl">
       <p className="text-sm leading-relaxed flex-1">
-        Usamos cookies e identificadores anônimos para entender como o site é
-        usado (Google Analytics e Cloudflare Analytics) e para registrar
-        conversas com a Luhara para fins de pesquisa e melhoria do
-        atendimento. Você pode aceitar apenas o essencial ou tudo. Saiba mais
-        na nossa{" "}
+        Usamos cookies para entender como o site é usado (Google Analytics e
+        Cloudflare Analytics). Você pode aceitar apenas o essencial ou tudo.
+        Saiba mais na nossa{" "}
         <a href="/privacidade" className="underline">
           política de privacidade
         </a>
@@ -231,8 +204,6 @@ function Index() {
 
   useEffect(() => {
     loadAnalyticsIfConsented();
-    logPageview(window.location.pathname);
-
     const onConsentChange = () => loadAnalyticsIfConsented();
     window.addEventListener("sne-consent-changed", onConsentChange);
     return () => window.removeEventListener("sne-consent-changed", onConsentChange);
