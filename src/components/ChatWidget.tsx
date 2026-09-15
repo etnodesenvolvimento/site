@@ -4,44 +4,6 @@ import { chatWithAI } from "@/lib/chat.functions";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-// ===== Tudo que era "lib/visitor.ts" e "lib/log.ts", agora aqui dentro =====
-
-const VISITOR_KEY = "sne_visitor_id";
-
-function getVisitorId(): string {
-  if (typeof window === "undefined") return "server";
-  let id = localStorage.getItem(VISITOR_KEY);
-  if (!id) {
-    id = crypto.randomUUID();
-    localStorage.setItem(VISITOR_KEY, id);
-  }
-  return id;
-}
-
-// Troque pela URL que você recebe ao publicar o Google Apps Script
-// (veja o arquivo apps-script/Code.gs e o README).
-const LOG_URL = import.meta.env.VITE_ACCESS_LOG_URL as string | undefined;
-
-function logChatMessage(sessionId: string, role: "user" | "assistant", content: string) {
-  if (typeof window === "undefined" || !LOG_URL) return;
-
-  const payload = {
-    type: "chat_message",
-    visitorId: getVisitorId(),
-    sessionId,
-    role,
-    content,
-    userAgent: navigator.userAgent,
-    timestamp: new Date().toISOString(),
-  };
-
-  const body = JSON.stringify(payload);
-  const sent = navigator.sendBeacon?.(LOG_URL, new Blob([body], { type: "text/plain;charset=UTF-8" }));
-  if (!sent) fetch(LOG_URL, { method: "POST", body, keepalive: true }).catch(() => {});
-}
-
-// ===== Componentes do chat =====
-
 export function ChatPill({ className = "" }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
@@ -72,6 +34,9 @@ export function ChatPill({ className = "" }: { className?: string }) {
   );
 }
 
+// Velocidade do efeito de "máquina de escrever" (ms por caractere)
+const TYPING_SPEED_MS = 18;
+
 function ChatModal({
   onClose,
   initialDraft,
@@ -82,8 +47,6 @@ function ChatModal({
   onDraftChange: (v: string) => void;
 }) {
   const send = useServerFn(chatWithAI);
-  // id único desta conversa, pra agrupar as mensagens no log
-  const sessionId = useRef(crypto.randomUUID());
 
   const [messages, setMessages] = useState<Msg[]>([
     {
@@ -97,6 +60,7 @@ function ChatModal({
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const typingIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -105,6 +69,35 @@ function ChatModal({
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  // Limpa o efeito de digitação se o usuário fechar o chat no meio da animação
+  useEffect(() => {
+    return () => {
+      if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+    };
+  }, []);
+
+  function typeOutMessage(fullText: string, base: Msg[]) {
+    const withEmpty = [...base, { role: "assistant" as const, content: "" }];
+    setMessages(withEmpty);
+    const msgIndex = withEmpty.length - 1;
+
+    if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
+
+    let i = 0;
+    typingIntervalRef.current = setInterval(() => {
+      i++;
+      setMessages((prev) => {
+        const copy = [...prev];
+        copy[msgIndex] = { role: "assistant", content: fullText.slice(0, i) };
+        return copy;
+      });
+      if (i >= fullText.length && typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+    }, TYPING_SPEED_MS);
+  }
 
   async function submit() {
     const text = input.trim();
@@ -115,19 +108,16 @@ function ChatModal({
     onDraftChange("");
     setLoading(true);
 
-    logChatMessage(sessionId.current, "user", text);
-
     try {
       const res = await send({ data: { messages: next } });
-      setMessages([...next, { role: "assistant", content: res.content }]);
-      logChatMessage(sessionId.current, "assistant", res.content);
+      setLoading(false);
+      typeOutMessage(res.content, next);
     } catch (e) {
       const fallback =
         "Desculpe, tive um problema para responder agora. Tente novamente em instantes.";
       setMessages([...next, { role: "assistant", content: fallback }]);
-      console.error(e);
-    } finally {
       setLoading(false);
+      console.error(e);
     }
   }
 
@@ -137,7 +127,6 @@ function ChatModal({
         className="bg-cream w-full md:max-w-2xl h-[85vh] md:h-[70vh] md:rounded-2xl rounded-t-2xl flex flex-col shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-ink/10 bg-cream">
           <div>
             <div className="text-[10px] uppercase tracking-widest text-ink/50 font-bold">Luhara · IA do SNE 2026</div>
@@ -146,7 +135,6 @@ function ChatModal({
           <button onClick={onClose} className="w-9 h-9 rounded-full hover:bg-ink/10 text-ink text-xl flex items-center justify-center">×</button>
         </div>
 
-        {/* Messages */}
         <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-6 space-y-4">
           {messages.map((m, i) => (
             <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -168,7 +156,6 @@ function ChatModal({
           )}
         </div>
 
-        {/* Composer */}
         <div className="border-t border-ink/10 p-3 bg-cream">
           <div className="flex items-end gap-2 bg-ink/5 rounded-3xl p-2 pl-4">
             <textarea
