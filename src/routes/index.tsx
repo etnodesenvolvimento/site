@@ -30,7 +30,6 @@ const INSCRICAO_EMAIL = "etnodesenvolvimento1@gmail.com";
 const CONSENT_KEY = "sne_consent_v1";
 const POLICY_VERSION = "2026-09-14";
 
-// IDs públicos do Google Analytics e Cloudflare (não são segredos)
 const GA_ID = "G-6FB8RBBRSG";
 const CF_TOKEN = "79bb28947dee4b0ca724db534135ebdc";
 
@@ -58,7 +57,6 @@ function saveConsent(analytics: boolean) {
 function loadAnalyticsIfConsented() {
   if (typeof window === "undefined" || !getConsent()?.analytics) return;
 
-  // Google Analytics 4
   if (!document.getElementById("ga4-script")) {
     const script = document.createElement("script");
     script.id = "ga4-script";
@@ -75,7 +73,6 @@ function loadAnalyticsIfConsented() {
     gtag("config", GA_ID, { anonymize_ip: true });
   }
 
-  // Cloudflare Web Analytics
   if (!document.getElementById("cf-analytics")) {
     const script = document.createElement("script");
     script.id = "cf-analytics";
