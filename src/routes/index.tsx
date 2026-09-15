@@ -185,7 +185,7 @@ function DayColumn({ date, weekday, blocks }: { date: string; weekday: string; b
     <div className="flex-1 min-w-0">
       <div className="mb-3 border-b-2 border-ink/20 pb-2">
         <div className="text-4xl md:text-5xl font-bold text-ink">{date}</div>
-        <div className="text-xs uppercase tracking-widest text-ink/60">Setembro · {weekday}</div>
+        <div className="text-xs uppercase tracking-widest text-ink/60">Outubro · {weekday}</div>
       </div>
       <div className="grid grid-cols-1 gap-2 auto-rows-[minmax(80px,auto)]">
         {blocks.map((b, i) => <AgendaBlock key={i} b={b} />)}
@@ -274,7 +274,7 @@ function Index() {
           <div className="mt-16 flex flex-wrap gap-10 items-end">
             <div>
               <div className="text-xs uppercase tracking-widest text-ink/50">Quando</div>
-              <div className="text-xl font-bold mt-1">Em Setembro · 2026</div>
+              <div className="text-xl font-bold mt-1">Em Outubro · 2026</div>
             </div>
             <div>
               <div className="text-xs uppercase tracking-widest text-ink/50">Onde</div>
