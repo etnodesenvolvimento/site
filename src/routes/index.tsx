@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import gilcianeImg from "@/assets/gilciane_neves.webp";
 import lucasImg from "@/assets/lucas_alberto_santos.webp";
 import pauloImg from "@/assets/paulo_azarias.webp";
@@ -22,6 +22,138 @@ export const Route = createFileRoute("/")({
 });
 
 const INSCRICAO_EMAIL = "etnodesenvolvimento1@gmail.com";
+
+// ======================================================================
+// TUDO DE ANALYTICS / LGPD / LOG DE ACESSO, direto aqui no index.tsx
+// ======================================================================
+
+const CONSENT_KEY = "sne_consent_v1";
+const POLICY_VERSION = "2026-09-14";
+
+const GA_ID = import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined;
+const CF_TOKEN = import.meta.env.VITE_CLOUDFLARE_ANALYTICS_TOKEN as string | undefined;
+const LOG_URL = import.meta.env.VITE_ACCESS_LOG_URL as string | undefined;
+
+type Consent = { necessary: true; analytics: boolean; policyVersion: string; ts: number };
+
+function getConsent(): Consent | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(CONSENT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Consent;
+    if (parsed.policyVersion !== POLICY_VERSION) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveConsent(analytics: boolean) {
+  const c: Consent = { necessary: true, analytics, policyVersion: POLICY_VERSION, ts: Date.now() };
+  localStorage.setItem(CONSENT_KEY, JSON.stringify(c));
+  window.dispatchEvent(new CustomEvent("sne-consent-changed"));
+}
+
+function getVisitorId(): string {
+  if (typeof window === "undefined") return "server";
+  let id = localStorage.getItem("sne_visitor_id");
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem("sne_visitor_id", id);
+  }
+  return id;
+}
+
+function loadAnalyticsIfConsented() {
+  if (typeof window === "undefined" || !getConsent()?.analytics) return;
+
+  // Google Analytics 4
+  if (GA_ID && !document.getElementById("ga4-script")) {
+    const script = document.createElement("script");
+    script.id = "ga4-script";
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(script);
+
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    function gtag(...args: any[]) {
+      (window as any).dataLayer.push(args);
+    }
+    (window as any).gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", GA_ID, { anonymize_ip: true });
+  }
+
+  // Cloudflare Web Analytics
+  if (CF_TOKEN && !document.getElementById("cf-analytics")) {
+    const script = document.createElement("script");
+    script.id = "cf-analytics";
+    script.defer = true;
+    script.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    script.setAttribute("data-cf-beacon", JSON.stringify({ token: CF_TOKEN }));
+    document.body.appendChild(script);
+  }
+}
+
+function logPageview(path: string) {
+  if (typeof window === "undefined" || !LOG_URL) return;
+  const payload = {
+    type: "pageview",
+    visitorId: getVisitorId(),
+    path,
+    referrer: document.referrer || "",
+    userAgent: navigator.userAgent,
+    timestamp: new Date().toISOString(),
+  };
+  const body = JSON.stringify(payload);
+  const sent = navigator.sendBeacon?.(LOG_URL, new Blob([body], { type: "text/plain;charset=UTF-8" }));
+  if (!sent) fetch(LOG_URL, { method: "POST", body, keepalive: true }).catch(() => {});
+}
+
+function CookieConsent() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!getConsent()) setVisible(true);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed bottom-0 inset-x-0 z-[200] bg-ink text-cream px-5 py-4 flex flex-col md:flex-row items-center gap-4 shadow-2xl">
+      <p className="text-sm leading-relaxed flex-1">
+        Usamos cookies e identificadores anônimos para entender como o site é
+        usado (Google Analytics e Cloudflare Analytics) e para registrar
+        conversas com a Luhara para fins de pesquisa e melhoria do
+        atendimento. Você pode aceitar apenas o essencial ou tudo. Saiba mais
+        na nossa{" "}
+        <a href="/privacidade" className="underline">
+          política de privacidade
+        </a>
+        .
+      </p>
+      <div className="flex gap-3 shrink-0">
+        <button
+          onClick={() => { saveConsent(false); setVisible(false); }}
+          className="px-4 py-2 text-sm rounded-sm border border-cream/30 hover:bg-cream/10"
+        >
+          Só o essencial
+        </button>
+        <button
+          onClick={() => { saveConsent(true); setVisible(false); }}
+          className="px-4 py-2 text-sm rounded-sm bg-accent font-bold hover:opacity-90"
+        >
+          Aceitar tudo
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ======================================================================
+// Conteúdo original da página
+// ======================================================================
 
 type Track = 1 | 2 | 3 | 4 | 5;
 type Block = { time?: string; title: string; subtitle?: string; track: Track; rows: number };
@@ -96,6 +228,15 @@ function DayColumn({ date, weekday, blocks }: { date: string; weekday: string; b
 function Index() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  useEffect(() => {
+    loadAnalyticsIfConsented();
+    logPageview(window.location.pathname);
+
+    const onConsentChange = () => loadAnalyticsIfConsented();
+    window.addEventListener("sne-consent-changed", onConsentChange);
+    return () => window.removeEventListener("sne-consent-changed", onConsentChange);
+  }, []);
 
   async function handleInscricao(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -360,7 +501,10 @@ function Index() {
             <div>
               <label className="flex items-start gap-3 text-sm opacity-80 cursor-pointer">
                 <input type="checkbox" required className="mt-1" />
-                <span>Aceito receber comunicações sobre o evento e concordo com os termos de uso e política de privacidade.</span>
+                <span>
+                  Aceito receber comunicações sobre o evento e concordo com os{" "}
+                  <a href="/privacidade" className="underline">termos de uso e política de privacidade</a>.
+                </span>
               </label>
             </div>
 
@@ -393,12 +537,15 @@ function Index() {
           <div>
             <div className="font-bold text-cream uppercase tracking-widest text-xs mb-3">Contato</div>
             <p>{INSCRICAO_EMAIL}</p>
+            <p className="mt-1"><a href="/privacidade" className="underline hover:text-cream">Política de Privacidade</a></p>
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-cream/10 text-xs opacity-50">
           Copyright © 2026 Etnodesenvolvimento • Todos os direitos reservados.
         </div>
       </footer>
+
+      <CookieConsent />
     </main>
   );
 }
