@@ -4,6 +4,44 @@ import { chatWithAI } from "@/lib/chat.functions";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
+// ===== Tudo que era "lib/visitor.ts" e "lib/log.ts", agora aqui dentro =====
+
+const VISITOR_KEY = "sne_visitor_id";
+
+function getVisitorId(): string {
+  if (typeof window === "undefined") return "server";
+  let id = localStorage.getItem(VISITOR_KEY);
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem(VISITOR_KEY, id);
+  }
+  return id;
+}
+
+// Troque pela URL que você recebe ao publicar o Google Apps Script
+// (veja o arquivo apps-script/Code.gs e o README).
+const LOG_URL = import.meta.env.VITE_ACCESS_LOG_URL as string | undefined;
+
+function logChatMessage(sessionId: string, role: "user" | "assistant", content: string) {
+  if (typeof window === "undefined" || !LOG_URL) return;
+
+  const payload = {
+    type: "chat_message",
+    visitorId: getVisitorId(),
+    sessionId,
+    role,
+    content,
+    userAgent: navigator.userAgent,
+    timestamp: new Date().toISOString(),
+  };
+
+  const body = JSON.stringify(payload);
+  const sent = navigator.sendBeacon?.(LOG_URL, new Blob([body], { type: "text/plain;charset=UTF-8" }));
+  if (!sent) fetch(LOG_URL, { method: "POST", body, keepalive: true }).catch(() => {});
+}
+
+// ===== Componentes do chat =====
+
 export function ChatPill({ className = "" }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
@@ -44,6 +82,9 @@ function ChatModal({
   onDraftChange: (v: string) => void;
 }) {
   const send = useServerFn(chatWithAI);
+  // id único desta conversa, pra agrupar as mensagens no log
+  const sessionId = useRef(crypto.randomUUID());
+
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: "assistant",
@@ -73,18 +114,17 @@ function ChatModal({
     setInput("");
     onDraftChange("");
     setLoading(true);
+
+    logChatMessage(sessionId.current, "user", text);
+
     try {
       const res = await send({ data: { messages: next } });
       setMessages([...next, { role: "assistant", content: res.content }]);
+      logChatMessage(sessionId.current, "assistant", res.content);
     } catch (e) {
-      setMessages([
-        ...next,
-        {
-          role: "assistant",
-          content:
-            "Desculpe, tive um problema para responder agora. Tente novamente em instantes.",
-        },
-      ]);
+      const fallback =
+        "Desculpe, tive um problema para responder agora. Tente novamente em instantes.";
+      setMessages([...next, { role: "assistant", content: fallback }]);
       console.error(e);
     } finally {
       setLoading(false);
@@ -105,7 +145,6 @@ function ChatModal({
           </div>
           <button onClick={onClose} className="w-9 h-9 rounded-full hover:bg-ink/10 text-ink text-xl flex items-center justify-center">×</button>
         </div>
-
 
         {/* Messages */}
         <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-6 space-y-4">
