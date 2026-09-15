@@ -58,6 +58,34 @@ async function notifyNewConversation() {
   const to = process.env.NOTIFY_EMAIL;
   if (!key || !to) return;
 
+  const dataHora = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+  const html = `
+  <div style="font-family: Georgia, 'Times New Roman', serif; background-color: #f7f3e8; padding: 40px 20px;">
+    <div style="max-width: 480px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06);">
+      <div style="background-color: #1f1e3a; padding: 28px 32px;">
+        <p style="margin: 0; color: #f7f3e8; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">
+          Luhara · SNE 2026
+        </p>
+        <h1 style="margin: 8px 0 0; color: #f7f3e8; font-size: 22px; font-weight: normal;">
+          Nova conversa iniciada
+        </h1>
+      </div>
+      <div style="padding: 32px;">
+        <p style="margin: 0 0 8px; color: #1f1e3a; font-size: 15px; line-height: 1.6;">
+          Uma pessoa começou a conversar com a Luhara.
+        </p>
+        <p style="margin: 24px 0 0; padding-top: 16px; border-top: 1px solid #eee; color: #999; font-size: 13px;">
+          ${dataHora}
+        </p>
+      </div>
+    </div>
+    <p style="text-align: center; color: #999; font-size: 11px; margin-top: 20px;">
+      Seminário Nacional de Etnodesenvolvimento
+    </p>
+  </div>
+  `;
+
   try {
     await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -69,7 +97,7 @@ async function notifyNewConversation() {
         from: "Luhara <onboarding@resend.dev>",
         to: [to],
         subject: "Nova conversa iniciada com a Luhara",
-        text: `Uma nova conversa começou em ${new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}.`,
+        html,
       }),
     });
   } catch (e) {
