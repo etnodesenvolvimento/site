@@ -19,13 +19,8 @@ export const Route = createFileRoute("/seminario")({
 
 const INSCRICAO_EMAIL = "etnodesenvolvimento1@gmail.com";
 
-// ======================================================================
-// ANALYTICS / LGPD (Google Analytics + Cloudflare Web Analytics)
-// ======================================================================
-
 const CONSENT_KEY = "sne_consent_v1";
 const POLICY_VERSION = "2026-09-14";
-
 const GA_ID = "G-6FB8RBBRSG";
 const CF_TOKEN = "79bb28947dee4b0ca724db534135ebdc";
 
@@ -116,10 +111,6 @@ function CookieConsent() {
     </div>
   );
 }
-
-// ======================================================================
-// Conteúdo da página do seminário
-// ======================================================================
 
 type Track = 1 | 2 | 3 | 4 | 5;
 type Block = { time?: string; title: string; subtitle?: string; track: Track; rows: number };
@@ -268,7 +259,6 @@ function Seminario() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      {/* NAV */}
       <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-ink/10">
         <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="/" className="text-sm font-bold tracking-tight text-ink">
@@ -304,7 +294,6 @@ function Seminario() {
         </nav>
       </header>
 
-      {/* HERO */}
       <section className="bg-cream text-ink">
         <div className="text-center pt-6 pb-2 px-4 text-xl sm:text-2xl md:text-3xl font-light text-ink/80 break-words">
           Projeto Territórios Sustentáveis Fase II
@@ -331,7 +320,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* SOBRE */}
       <section id="sobre" className="max-w-7xl mx-auto px-6 py-20 md:py-28">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
@@ -346,7 +334,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* HOMENAGEADO */}
       <section id="homenageado" className="bg-ink text-cream py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 md:gap-16 items-center">
           <div className="md:col-span-2">
@@ -373,7 +360,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* TEMA */}
       <section className="max-w-7xl mx-auto px-6 py-20 md:py-28">
         <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">03 / Tema 2026</div>
         <h2 className="mt-3 text-4xl md:text-6xl text-ink max-w-4xl">
@@ -384,7 +370,6 @@ function Seminario() {
         </p>
       </section>
 
-      {/* PROGRAMAÇÃO */}
       <section id="programacao" className="py-20 md:py-28 border-y" style={{ backgroundColor: "#f7f3e8", borderColor: "rgba(31,30,58,0.1)", color: "#1f1e3a" }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
@@ -407,7 +392,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* PALESTRANTES */}
       <section id="palestrantes" className="bg-primary text-primary-foreground py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">05 / Convidados</div>
@@ -432,7 +416,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* EIXOS */}
       <section className="max-w-7xl mx-auto px-6 py-20 md:py-28">
         <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">06 / Eixos Temáticos</div>
         <h2 className="mt-3 text-4xl md:text-5xl text-ink mb-10">O que vamos debater</h2>
@@ -443,7 +426,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* LOCAL - GOOGLE MAPS */}
       <section id="local" className="bg-cream border-t border-ink/10">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
           <div>
@@ -470,7 +452,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* INSCRIÇÃO */}
       <section id="inscricao" className="py-20 md:py-28" style={{ backgroundColor: "#1f1e3a", color: "#f7f3e8" }}>
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: "#e74c3c" }}>08 / Inscrição</div>
@@ -517,7 +498,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* CERTIFICADO */}
       <section id="certificado" className="py-20 md:py-28 bg-cream border-b border-ink/10">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">09 / Certificado</div>
@@ -567,7 +547,6 @@ function Seminario() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="bg-ink text-cream/70 border-t border-cream/10 py-12">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 text-sm">
           <div>
