@@ -281,7 +281,26 @@ function Seminario() {
             <a href="#palestrantes" className="hover:text-ink">Palestrantes</a>
             <a href="#local" className="hover:text-ink">Local</a>
           </div>
-          <a href="#inscricao" className="bg-ink text-cream px-5 py-2.5 text-sm font-bold rounded-sm hover:opacity-90 transition">INSCREVA-SE</a>
+          <div className="flex items-center gap-3">
+            
+              href="/"
+              className="hidden sm:inline-flex border border-ink/30 text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
+            >
+              ← VOLTAR
+            </a>
+            
+              href="#certificado"
+              className="border border-ink text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
+            >
+              SOLICITAR CERTIFICADO
+            </a>
+            
+              href="#inscricao"
+              className="bg-ink text-cream px-5 py-2.5 text-sm font-bold rounded-sm hover:opacity-90 transition"
+            >
+              INSCREVA-SE
+            </a>
+          </div>
         </nav>
       </header>
 
@@ -317,7 +336,7 @@ function Seminario() {
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
             <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">01 / Sobre</div>
-            <h2 className="mt-3 text-4xl md:text-5xl text-ink">Um espaço de diálogo e produção de conhecimento</h2>
+            <h2 className="mt-3 text-4xl md:text-5xl text-ink leading-tight break-words">Um espaço de diálogo e produção de conhecimento</h2>
           </div>
           <div className="md:col-span-8 space-y-5 text-lg leading-relaxed text-ink/80">
             <p>O <strong className="text-ink">Seminário Nacional de Etnodesenvolvimento</strong> reúne pesquisadores, estudantes, gestores públicos, lideranças comunitárias e organizações sociais para refletir sobre experiências, desafios e perspectivas do etnodesenvolvimento no Brasil.</p>
