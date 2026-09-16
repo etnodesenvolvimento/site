@@ -136,12 +136,28 @@ function Index() {
             <a href="#sobre" className="hover:text-ink">Sobre</a>
             <a href="/seminario" className="hover:text-ink">Seminário</a>
           </div>
-          <a href="/seminario#inscricao" className="bg-ink text-cream px-5 py-2.5 text-sm font-bold rounded-sm hover:opacity-90 transition">INSCREVA-SE</a>
+          <div className="flex items-center gap-3">
+            
+              href="/seminario#certificado"
+              className="border border-ink text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
+            >
+              SOLICITAR CERTIFICADO
+            </a>
+            
+              href="/seminario#inscricao"
+              className="bg-ink text-cream px-5 py-2.5 text-sm font-bold rounded-sm hover:opacity-90 transition"
+            >
+              INSCREVA-SE
+            </a>
+          </div>
         </nav>
       </header>
 
       {/* LUHARA + CHAT */}
       <section className="max-w-7xl mx-auto px-6 py-20 md:py-32 flex flex-col items-center text-center">
+        <div className="text-lg sm:text-xl md:text-2xl font-light text-ink/70 mb-6 break-words max-w-3xl">
+          Projeto Territórios Sustentáveis Fase II
+        </div>
         <img
           src={luharaImg}
           alt="Luhara"
@@ -159,7 +175,7 @@ function Index() {
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
             <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">Sobre</div>
-            <h2 className="mt-3 text-4xl md:text-5xl text-ink">O que é o Etnodesenvolvimento</h2>
+            <h2 className="mt-3 text-4xl md:text-5xl text-ink leading-tight break-words">O que é o Etnodesenvolvimento</h2>
           </div>
           <div className="md:col-span-8 space-y-5 text-lg leading-relaxed text-ink/80">
             <p>O <strong className="text-ink">Etnodesenvolvimento</strong> reúne pesquisadores, estudantes, gestores públicos, lideranças comunitárias e organizações sociais para refletir sobre experiências, desafios e perspectivas do desenvolvimento territorial no Brasil.</p>
@@ -169,12 +185,14 @@ function Index() {
       </section>
 
       {/* FAIXA */}
-      <section className="max-w-7xl mx-auto px-6 py-12 border-t border-ink/10 flex justify-center">
-        <img
-          src={faixaImg}
-          alt="Apoio, Realização e Patrocínio"
-          className="w-full max-w-6xl h-auto object-contain"
-        />
+      <section className="bg-white py-12 border-t border-ink/10">
+        <div className="max-w-7xl mx-auto px-6 flex justify-center">
+          <img
+            src={faixaImg}
+            alt="Apoio, Realização e Patrocínio"
+            className="w-full max-w-6xl h-auto object-contain"
+          />
+        </div>
       </section>
 
       {/* FOOTER */}
