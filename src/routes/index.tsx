@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import luharaImg from "@/assets/luhara.png";
 import faixaImg from "@/assets/faixa.webp";
 import { ChatPill } from "@/components/ChatWidget";
@@ -23,6 +23,7 @@ const POLICY_VERSION = "2026-09-14";
 
 const GA_ID = "G-6FB8RBBRSG";
 const CF_TOKEN = "79bb28947dee4b0ca724db534135ebdc";
+const CERT_EMAIL = "etnodesenvolvimento1@gmail.com";
 
 type Consent = { necessary: true; analytics: boolean; policyVersion: string; ts: number };
 
@@ -113,16 +114,114 @@ function CookieConsent() {
 }
 
 // ======================================================================
+// MODAL DE VÍDEO DE ENTRADA
+// ======================================================================
+
+function IntroVideoModal() {
+  const [show, setShow] = useState(false);
+  const [needsUnmute, setNeedsUnmute] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(true), 4000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!show || !videoRef.current) return;
+    const v = videoRef.current;
+    v.muted = false;
+    v.play().catch(() => {
+      // Navegador bloqueou autoplay com som (comportamento padrão em quem
+      // ainda não interagiu com o domínio). Caímos pra mudo pra garantir
+      // que o vídeo toque, e mostramos um botão pra ativar o som.
+      v.muted = true;
+      setNeedsUnmute(true);
+      v.play().catch(() => {});
+    });
+  }, [show]);
+
+  if (!show) return null;
+
+  return (
+    <div className="fixed inset-0 z-[300] bg-ink/90 flex items-center justify-center p-4">
+      <div className="relative w-full max-w-3xl">
+        <button
+          onClick={() => setShow(false)}
+          aria-label="Fechar vídeo"
+          className="absolute -top-12 right-0 text-cream text-4xl leading-none font-light hover:opacity-70"
+        >
+          ×
+        </button>
+        <video
+          ref={videoRef}
+          src="/videos/luhara-intro.mp4"
+          autoPlay
+          controls
+          playsInline
+          className="w-full rounded-sm shadow-2xl bg-black"
+        />
+        {needsUnmute && (
+          <button
+            onClick={() => {
+              if (videoRef.current) {
+                videoRef.current.muted = false;
+                setNeedsUnmute(false);
+              }
+            }}
+            className="absolute bottom-4 left-4 bg-ink text-cream px-4 py-2 text-sm font-bold rounded-sm shadow-lg"
+          >
+            🔊 Ativar som
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ======================================================================
 // Conteúdo da home
 // ======================================================================
 
 function Index() {
+  const [certStatus, setCertStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
   useEffect(() => {
     loadAnalyticsIfConsented();
     const onConsentChange = () => loadAnalyticsIfConsented();
     window.addEventListener("sne-consent-changed", onConsentChange);
     return () => window.removeEventListener("sne-consent-changed", onConsentChange);
   }, []);
+
+  async function handleCertificado(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setCertStatus("sending");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    const payload = {
+      "Nome (como sairá no certificado)": data.get("nomeCert") || "",
+      "Observações": data.get("obsCert") || "Nenhuma",
+      _subject: "Nova solicitação de certificado — Etnodesenvolvimento",
+      _template: "table",
+    };
+
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${CERT_EMAIL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        setCertStatus("sent");
+        form.reset();
+      } else {
+        setCertStatus("error");
+      }
+    } catch {
+      setCertStatus("error");
+    }
+  }
 
   return (
     <main className="min-h-screen bg-cream text-ink">
@@ -138,7 +237,7 @@ function Index() {
           </div>
           <div className="flex items-center gap-3">
             
-              href="/seminario#certificado"
+              href="#certificado"
               className="border border-ink text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
             >
               SOLICITAR CERTIFICADO
@@ -172,10 +271,10 @@ function Index() {
 
       {/* SOBRE */}
       <section id="sobre" className="max-w-7xl mx-auto px-6 py-20 md:py-28 border-t border-ink/10">
-        <div className="grid md:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-10 gap-y-6 items-start">
           <div className="md:col-span-4">
             <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">Sobre</div>
-            <h2 className="mt-3 text-4xl md:text-5xl text-ink leading-tight break-words">O que é o Etnodesenvolvimento</h2>
+            <h2 className="mt-3 text-4xl md:text-5xl text-ink leading-[1.15] break-words">O que é o Etnodesenvolvimento</h2>
           </div>
           <div className="md:col-span-8 space-y-5 text-lg leading-relaxed text-ink/80">
             <p>O <strong className="text-ink">Etnodesenvolvimento</strong> reúne pesquisadores, estudantes, gestores públicos, lideranças comunitárias e organizações sociais para refletir sobre experiências, desafios e perspectivas do desenvolvimento territorial no Brasil.</p>
@@ -184,8 +283,58 @@ function Index() {
         </div>
       </section>
 
+      {/* CERTIFICADO */}
+      <section id="certificado" className="py-20 md:py-28 bg-ink text-cream border-t border-cream/10">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">Certificado</div>
+          <h2 className="mt-3 text-4xl md:text-6xl">Solicitar certificado de participação.</h2>
+          <p className="mt-4 text-lg opacity-70">Informe o nome que deve constar no certificado.</p>
+
+          <form onSubmit={handleCertificado} className="mt-10 space-y-5">
+            <div>
+              <label htmlFor="nomeCert" className="block text-xs uppercase tracking-widest opacity-60 mb-2">
+                Nome (como seu nome sairá no certificado) *
+              </label>
+              <input
+                id="nomeCert"
+                name="nomeCert"
+                type="text"
+                required
+                className="w-full bg-transparent border-b-2 border-cream/30 py-2 text-base text-cream placeholder:text-cream/30 focus:outline-none focus:border-accent transition"
+              />
+            </div>
+            <div>
+              <label htmlFor="obsCert" className="block text-xs uppercase tracking-widest opacity-60 mb-2">
+                Observações (opcional)
+              </label>
+              <textarea
+                id="obsCert"
+                name="obsCert"
+                rows={3}
+                className="w-full bg-transparent border-2 border-cream/20 rounded-sm py-2 px-3 text-base text-cream placeholder:text-cream/30 focus:outline-none focus:border-accent transition"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={certStatus === "sending"}
+              className="w-full md:w-auto px-10 py-4 text-base font-bold rounded-sm hover:opacity-90 transition disabled:opacity-50 bg-accent text-ink"
+            >
+              {certStatus === "sending" ? "ENVIANDO…" : "SOLICITAR CERTIFICADO →"}
+            </button>
+
+            {certStatus === "sent" && (
+              <p className="text-sm text-emerald-400">Solicitação recebida! Em breve você receberá o certificado por e-mail.</p>
+            )}
+            {certStatus === "error" && (
+              <p className="text-sm text-red-400">Não foi possível enviar agora. Tente novamente ou escreva para {CERT_EMAIL}.</p>
+            )}
+          </form>
+        </div>
+      </section>
+
       {/* FAIXA */}
-      <section className="bg-white py-12 border-t border-ink/10">
+      <section className="bg-white py-16 border-t border-ink/10">
         <div className="max-w-7xl mx-auto px-6 flex justify-center">
           <img
             src={faixaImg}
@@ -214,6 +363,7 @@ function Index() {
         </div>
       </footer>
 
+      <IntroVideoModal />
       <CookieConsent />
     </main>
   );
