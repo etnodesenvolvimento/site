@@ -272,19 +272,19 @@ function Seminario() {
             <a href="#local" className="hover:text-ink">Local</a>
           </div>
           <div className="flex items-center gap-3">
-            
+            <a
               href="/"
               className="hidden sm:inline-flex border border-ink/30 text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
             >
               ← VOLTAR
             </a>
-            
+            <a
               href="#certificado"
               className="border border-ink text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
             >
               SOLICITAR CERTIFICADO
             </a>
-            
+            <a
               href="#inscricao"
               className="bg-ink text-cream px-5 py-2.5 text-sm font-bold rounded-sm hover:opacity-90 transition"
             >
