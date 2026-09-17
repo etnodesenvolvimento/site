@@ -261,8 +261,8 @@ function Seminario() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-ink/10">
-        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-sm font-bold tracking-tight text-ink">
+        <nav className="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-2">
+          <a href="/" className="text-xs sm:text-sm font-bold tracking-tight text-ink shrink-0">
             I SNE · <span className="opacity-60">2026</span>
           </a>
           <div className="hidden md:flex gap-6 text-sm font-medium text-ink/70">
@@ -272,22 +272,22 @@ function Seminario() {
             <a href="#palestrantes" className="hover:text-ink">Palestrantes</a>
             <a href="#local" className="hover:text-ink">Local</a>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 sm:gap-3 overflow-x-auto">
             <a
               href="/"
-              className="hidden sm:inline-flex border border-ink/30 text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
+              className="border border-ink/30 text-ink px-2 py-1.5 sm:px-4 sm:py-2.5 text-[10px] sm:text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition whitespace-nowrap"
             >
               ← VOLTAR
             </a>
             <a
               href="#certificado"
-              className="border border-ink text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
+              className="border border-ink text-ink px-2 py-1.5 sm:px-4 sm:py-2.5 text-[10px] sm:text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition whitespace-nowrap"
             >
-              SOLICITAR CERTIFICADO
+              CERTIFICADO
             </a>
             <a
               href="#inscricao"
-              className="bg-ink text-cream px-5 py-2.5 text-sm font-bold rounded-sm hover:opacity-90 transition"
+              className="bg-ink text-cream px-2 py-1.5 sm:px-5 sm:py-2.5 text-[10px] sm:text-sm font-bold rounded-sm hover:opacity-90 transition whitespace-nowrap"
             >
               INSCREVA-SE
             </a>
