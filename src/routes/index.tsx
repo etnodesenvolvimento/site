@@ -362,7 +362,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 text-sm">
           <div>
             <div className="font-bold text-cream text-base">I SNE · 2026</div>
-            <p className="mt-2">Etnodesenvolvimento — In Memoriam Jorge da Silva Nascimento</p>
+            <p className="mt-2">Etnodesenvolvimento — Seminário Nacional de Etnodesenvolvimento -In Memoriam Jorge da Silva Nascimento</p>
           </div>
           <div>
             <div className="font-bold text-cream uppercase tracking-widest text-xs mb-3">Contato</div>
