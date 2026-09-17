@@ -88,7 +88,8 @@ function CookieConsent() {
   return (
     <div className="fixed bottom-0 inset-x-0 z-[200] bg-ink text-cream px-5 py-4 flex flex-col md:flex-row items-center gap-4 shadow-2xl">
       <p className="text-sm leading-relaxed flex-1">
-        Usamos cookies para entender como o site é usado.
+        Usamos cookies para entender como o site é usado (Google Analytics e
+        Cloudflare Analytics). Você pode aceitar apenas o essencial ou tudo.
         Saiba mais na nossa{" "}
         <a href="/privacidade" className="underline">
           política de privacidade
@@ -277,7 +278,7 @@ function Index() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-10 gap-y-6 items-start">
           <div className="md:col-span-4">
             <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">Sobre</div>
-            <h2 className="mt-3 text-4xl md:text-5xl text-ink leading-[1.15] break-words">O que é o Etnodesenvolvimento</h2>
+            <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl text-ink leading-[1.15]">O que é o Etnodesenvolvimento</h2>
           </div>
           <div className="md:col-span-8 space-y-5 text-lg leading-relaxed text-ink/80">
             <p>O <strong className="text-ink">Etnodesenvolvimento</strong> reúne pesquisadores, estudantes, gestores públicos, lideranças comunitárias e organizações sociais para refletir sobre experiências, desafios e perspectivas do desenvolvimento territorial no Brasil.</p>
