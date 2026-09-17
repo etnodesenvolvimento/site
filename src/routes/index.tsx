@@ -88,8 +88,7 @@ function CookieConsent() {
   return (
     <div className="fixed bottom-0 inset-x-0 z-[200] bg-ink text-cream px-5 py-4 flex flex-col md:flex-row items-center gap-4 shadow-2xl">
       <p className="text-sm leading-relaxed flex-1">
-        Usamos cookies para entender como o site é usado (Google Analytics e
-        Cloudflare Analytics). Você pode aceitar apenas o essencial ou tudo.
+        Usamos cookies para entender como o site é usado.
         Saiba mais na nossa{" "}
         <a href="/privacidade" className="underline">
           política de privacidade
@@ -229,24 +228,26 @@ function Index() {
     <main className="min-h-screen bg-cream text-ink">
       {/* NAV */}
       <header className="sticky top-0 z-50 bg-cream/90 backdrop-blur border-b border-ink/10">
-        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-sm font-bold tracking-tight text-ink">
+        <nav className="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex items-center justify-between gap-2">
+          <a href="/" className="text-xs sm:text-sm font-bold tracking-tight text-ink shrink-0">
             I SNE · <span className="opacity-60">2026</span>
           </a>
-          <div className="hidden md:flex gap-6 text-sm font-medium text-ink/70">
-            <a href="#sobre" className="hover:text-ink">Sobre</a>
-            <a href="/seminario" className="hover:text-ink">Seminário</a>
-          </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 sm:gap-3 overflow-x-auto">
+            <a href="#sobre" className="hidden sm:inline text-sm font-medium text-ink/70 hover:text-ink whitespace-nowrap px-1">
+              Sobre
+            </a>
+            <a href="/seminario" className="text-[11px] sm:text-sm font-medium text-ink/70 hover:text-ink whitespace-nowrap px-1">
+              Seminário
+            </a>
             <a
               href="#certificado"
-              className="border border-ink text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
+              className="border border-ink text-ink px-2 py-1.5 sm:px-4 sm:py-2.5 text-[10px] sm:text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition whitespace-nowrap"
             >
-              SOLICITAR CERTIFICADO
+              CERTIFICADO
             </a>
             <a
               href="/seminario#inscricao"
-              className="bg-ink text-cream px-5 py-2.5 text-sm font-bold rounded-sm hover:opacity-90 transition"
+              className="bg-ink text-cream px-2 py-1.5 sm:px-5 sm:py-2.5 text-[10px] sm:text-sm font-bold rounded-sm hover:opacity-90 transition whitespace-nowrap"
             >
               INSCREVA-SE
             </a>
