@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import luharaImg from "@/assets/luhara.png";
 import faixaImg from "@/assets/faixa.webp";
+import luharaVideo from "@/assets/video_luahara_1.mp4";
 import { ChatPill } from "@/components/ChatWidget";
 
 export const Route = createFileRoute("/")({
@@ -155,7 +156,7 @@ function IntroVideoModal() {
         </button>
         <video
           ref={videoRef}
-          src="/videos/luhara-intro.mp4"
+          src={luharaVideo}
           autoPlay
           controls
           playsInline
