@@ -236,13 +236,13 @@ function Index() {
             <a href="/seminario" className="hover:text-ink">Seminário</a>
           </div>
           <div className="flex items-center gap-3">
-            
+            <a
               href="#certificado"
               className="border border-ink text-ink px-4 py-2.5 text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition"
             >
               SOLICITAR CERTIFICADO
             </a>
-            
+            <a
               href="/seminario#inscricao"
               className="bg-ink text-cream px-5 py-2.5 text-sm font-bold rounded-sm hover:opacity-90 transition"
             >
