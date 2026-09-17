@@ -201,7 +201,8 @@ function Index() {
 
     const payload = {
       "Nome (como sairá no certificado)": data.get("nomeCert") || "",
-      "Observações": data.get("obsCert") || "Nenhuma",
+      "E-mail": data.get("emailCert") || "",
+      "Telefone": data.get("telCert") || "Não informado",
       _subject: "Nova solicitação de certificado — Etnodesenvolvimento",
       _template: "table",
     };
@@ -253,8 +254,8 @@ function Index() {
       </header>
 
       {/* LUHARA + CHAT */}
-      <section className="max-w-7xl mx-auto px-6 py-20 md:py-32 flex flex-col items-center text-center">
-        <div className="text-lg sm:text-xl md:text-2xl font-light text-ink/70 mb-6 break-words max-w-3xl">
+      <section className="max-w-7xl mx-auto px-6 pt-6 pb-20 md:pt-10 md:pb-32 flex flex-col items-center text-center">
+        <div className="text-lg sm:text-xl md:text-2xl font-light text-ink/70 mb-4 break-words max-w-3xl">
           Projeto Territórios Sustentáveis Fase II
         </div>
         <img
@@ -303,16 +304,30 @@ function Index() {
                 className="w-full bg-transparent border-b-2 border-cream/30 py-2 text-base text-cream placeholder:text-cream/30 focus:outline-none focus:border-accent transition"
               />
             </div>
-            <div>
-              <label htmlFor="obsCert" className="block text-xs uppercase tracking-widest opacity-60 mb-2">
-                Observações (opcional)
-              </label>
-              <textarea
-                id="obsCert"
-                name="obsCert"
-                rows={3}
-                className="w-full bg-transparent border-2 border-cream/20 rounded-sm py-2 px-3 text-base text-cream placeholder:text-cream/30 focus:outline-none focus:border-accent transition"
-              />
+            <div className="grid md:grid-cols-2 gap-5">
+              <div>
+                <label htmlFor="emailCert" className="block text-xs uppercase tracking-widest opacity-60 mb-2">
+                  E-mail *
+                </label>
+                <input
+                  id="emailCert"
+                  name="emailCert"
+                  type="email"
+                  required
+                  className="w-full bg-transparent border-b-2 border-cream/30 py-2 text-base text-cream placeholder:text-cream/30 focus:outline-none focus:border-accent transition"
+                />
+              </div>
+              <div>
+                <label htmlFor="telCert" className="block text-xs uppercase tracking-widest opacity-60 mb-2">
+                  Telefone
+                </label>
+                <input
+                  id="telCert"
+                  name="telCert"
+                  type="tel"
+                  className="w-full bg-transparent border-b-2 border-cream/30 py-2 text-base text-cream placeholder:text-cream/30 focus:outline-none focus:border-accent transition"
+                />
+              </div>
             </div>
 
             <button
