@@ -9,9 +9,9 @@ export const Route = createFileRoute("/seminario")({
   head: () => ({
     meta: [
       { title: "Seminário Nacional de Etnodesenvolvimento — Região Metropolitana de Porto Alegre-RS/Brasil 2026" },
-      { name: "description", content: "Setembro de 2026 · Região Metropolitana de Porto Alegre/RS — Ancestralidade, Território e Desenvolvimento para um Brasil Plural. In Memoriam Jorge da Silva Nascimento." },
+      { name: "description", content: "Outubro de 2026 · Região Metropolitana de Porto Alegre/RS — Ancestralidade, Território e Desenvolvimento para um Brasil Plural. In Memoriam Jorge da Silva Nascimento." },
       { property: "og:title", content: "Seminário Nacional de Etnodesenvolvimento" },
-      { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Região Metropolitana de Porto Alegre-RS/Brasil, Setembro de 2026" },
+      { property: "og:description", content: "Ancestralidade, Território e Desenvolvimento para um Brasil Plural — Região Metropolitana de Porto Alegre-RS/Brasil, Outubro de 2026" },
     ],
   }),
   component: Seminario,
@@ -86,8 +86,7 @@ function CookieConsent() {
   return (
     <div className="fixed bottom-0 inset-x-0 z-[200] bg-ink text-cream px-5 py-4 flex flex-col md:flex-row items-center gap-4 shadow-2xl">
       <p className="text-sm leading-relaxed flex-1">
-        Usamos cookies para entender como o site é usado (Google Analytics e
-        Cloudflare Analytics). Você pode aceitar apenas o essencial ou tudo.
+        Usamos cookies para entender como o site é usado.
         Saiba mais na nossa{" "}
         <a href="/privacidade" className="underline">
           política de privacidade
@@ -433,7 +432,7 @@ function Seminario() {
             <div className="text-xs font-bold uppercase tracking-[0.25em] text-accent">07 / Local</div>
             <h2 className="mt-3 text-4xl md:text-5xl text-ink">Região Metropolitana de Porto Alegre, RS</h2>
             <p className="mt-6 text-lg text-ink/70 leading-relaxed">
-              O seminário acontece na Região Metropolitana de Porto Alegre, em espaços com infraestrutura completa de acessibilidade.
+             O seminário acontece na Região Metropolitana de Porto Alegre, em espaços com infraestrutura completa de acessibilidade.
             </p>
             <ul className="mt-6 space-y-3 text-ink/80">
               <li className="flex gap-3"><span className="text-accent font-bold">→</span> Espaços e banheiros acessíveis</li>
@@ -566,7 +565,7 @@ function Seminario() {
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 text-sm">
           <div>
             <div className="font-bold text-cream text-base">I SNE · 2026</div>
-            <p className="mt-2">Seminário Nacional de Etnodesenvolvimento — In Memoriam Jorge da Silva Nascimento</p>
+            <p className="mt-2">Seminário Nacional de Etnodesenvolvimento </p>
           </div>
           <div>
             <div className="font-bold text-cream uppercase tracking-widest text-xs mb-3">Contato</div>
