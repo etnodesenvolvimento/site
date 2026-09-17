@@ -235,7 +235,8 @@ function Seminario() {
 
     const payload = {
       "Nome (como sairá no certificado)": data.get("nomeCert") || "",
-      "Observações": data.get("obsCert") || "Nenhuma",
+      "E-mail": data.get("emailCert") || "",
+      "Telefone": data.get("telCert") || "Não informado",
       _subject: "Nova solicitação de certificado — Seminário Nacional de Etnodesenvolvimento",
       _template: "table",
     };
@@ -517,16 +518,30 @@ function Seminario() {
                 className="w-full bg-transparent border-b-2 border-ink/30 py-2 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:border-accent transition"
               />
             </div>
-            <div>
-              <label htmlFor="obsCert" className="block text-xs uppercase tracking-widest text-ink/60 mb-2">
-                Observações (opcional)
-              </label>
-              <textarea
-                id="obsCert"
-                name="obsCert"
-                rows={3}
-                className="w-full bg-transparent border-2 border-ink/20 rounded-sm py-2 px-3 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:border-accent transition"
-              />
+            <div className="grid md:grid-cols-2 gap-5">
+              <div>
+                <label htmlFor="emailCert" className="block text-xs uppercase tracking-widest text-ink/60 mb-2">
+                  E-mail *
+                </label>
+                <input
+                  id="emailCert"
+                  name="emailCert"
+                  type="email"
+                  required
+                  className="w-full bg-transparent border-b-2 border-ink/30 py-2 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:border-accent transition"
+                />
+              </div>
+              <div>
+                <label htmlFor="telCert" className="block text-xs uppercase tracking-widest text-ink/60 mb-2">
+                  Telefone
+                </label>
+                <input
+                  id="telCert"
+                  name="telCert"
+                  type="tel"
+                  className="w-full bg-transparent border-b-2 border-ink/30 py-2 text-base text-ink placeholder:text-ink/30 focus:outline-none focus:border-accent transition"
+                />
+              </div>
             </div>
 
             <button
