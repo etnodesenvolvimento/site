@@ -172,7 +172,7 @@ function IntroVideoModal() {
   const wrapperClass = isBig
     ? "fixed inset-0 z-[300] bg-ink/90 flex items-center justify-center p-4"
     : `fixed left-4 z-[190] w-56 sm:w-72 ${
-        cookieBannerVisible ? "bottom-40 md:bottom-24" : "bottom-4"
+        cookieBannerVisible ? "bottom-48 md:bottom-28" : "bottom-4"
       }`;
 
   const innerClass = isBig ? "relative w-full max-w-3xl" : "relative w-full";
@@ -187,6 +187,9 @@ function IntroVideoModal() {
           controls
           playsInline
           preload="auto"
+          onVolumeChange={(e) => {
+            if (!e.currentTarget.muted) setNeedsUnmute(false);
+          }}
           className="w-full rounded-sm shadow-2xl bg-black"
         />
 
