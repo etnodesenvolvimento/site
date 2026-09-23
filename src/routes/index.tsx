@@ -114,20 +114,24 @@ function CookieConsent() {
 }
 
 // ======================================================================
-// VÍDEO DA LUHARA: modal grande + mini player travado na seção da Luhara
+// MODAL DE VÍDEO DE ENTRADA
 // ======================================================================
 
-function BigVideoModal({ onClose }: { onClose: () => void }) {
+function IntroVideoModal() {
+  const [show, setShow] = useState(false);
   const [needsUnmute, setNeedsUnmute] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    const timer = setTimeout(() => setShow(true), 4000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!show || !videoRef.current) return;
     const v = videoRef.current;
-    if (!v) return;
-    v.currentTime = 0;
     v.muted = false;
-    v.play().catch((err: any) => {
-      if (err && err.name === "AbortError") return;
+    v.play().catch(() => {
       // Navegador bloqueou autoplay com som (comportamento padrão em quem
       // ainda não interagiu com o domínio). Caímos pra mudo pra garantir
       // que o vídeo toque, e mostramos um botão pra ativar o som.
@@ -135,13 +139,15 @@ function BigVideoModal({ onClose }: { onClose: () => void }) {
       setNeedsUnmute(true);
       v.play().catch(() => {});
     });
-  }, []);
+  }, [show]);
+
+  if (!show) return null;
 
   return (
     <div className="fixed inset-0 z-[300] bg-ink/90 flex items-center justify-center p-4">
       <div className="relative w-full max-w-3xl">
         <button
-          onClick={onClose}
+          onClick={() => setShow(false)}
           aria-label="Fechar vídeo"
           className="absolute -top-12 right-0 text-cream text-4xl leading-none font-light hover:opacity-70"
         >
@@ -150,12 +156,10 @@ function BigVideoModal({ onClose }: { onClose: () => void }) {
         <video
           ref={videoRef}
           src={luharaVideo}
+          autoPlay
           controls
           playsInline
           className="w-full rounded-sm shadow-2xl bg-black"
-          onVolumeChange={(e) => {
-            if (!e.currentTarget.muted) setNeedsUnmute(false);
-          }}
         />
         {needsUnmute && (
           <button
@@ -172,64 +176,6 @@ function BigVideoModal({ onClose }: { onClose: () => void }) {
         )}
       </div>
     </div>
-  );
-}
-
-function IntroVideoModal() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [miniVisible, setMiniVisible] = useState(false);
-  const miniRef = useRef<HTMLVideoElement>(null);
-
-  // Abre o modal grande 4s depois da entrada
-  useEffect(() => {
-    const timer = setTimeout(() => setModalOpen(true), 4000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  function openBig() {
-    if (miniRef.current) miniRef.current.pause();
-    setModalOpen(true);
-  }
-
-  function closeBig() {
-    setModalOpen(false);
-    setMiniVisible(true);
-    if (miniRef.current) {
-      miniRef.current.pause();
-      miniRef.current.currentTime = 0;
-    }
-  }
-
-  return (
-    <>
-      {miniVisible && (
-        <div className="absolute left-3 bottom-4 sm:left-6 sm:bottom-6 z-10 w-36 sm:w-56 md:w-72">
-          <div className="relative w-full">
-            <video
-              ref={miniRef}
-              src={luharaVideo}
-              poster={luharaImg}
-              controls
-              playsInline
-              preload="metadata"
-              className="w-full rounded-sm shadow-2xl bg-black"
-            />
-            <span className="pointer-events-none absolute top-2 left-2 bg-ink/80 text-cream text-[11px] font-bold px-2 py-1 rounded-sm">
-              Veja Luahara
-            </span>
-            <button
-              onClick={openBig}
-              aria-label="Expandir vídeo"
-              className="absolute top-2 right-2 bg-ink/80 text-cream w-7 h-7 flex items-center justify-center rounded-sm text-base leading-none hover:bg-ink"
-            >
-              ⤢
-            </button>
-          </div>
-        </div>
-      )}
-
-      {modalOpen && <BigVideoModal onClose={closeBig} />}
-    </>
   );
 }
 
@@ -293,13 +239,13 @@ function Index() {
             <a href="/seminario" className="text-[11px] sm:text-sm font-medium text-ink/70 hover:text-ink whitespace-nowrap px-1">
               Seminário
             </a>
-            
+            <a
               href="#certificado"
               className="border border-ink text-ink px-2 py-1.5 sm:px-4 sm:py-2.5 text-[10px] sm:text-sm font-bold rounded-sm hover:bg-ink hover:text-cream transition whitespace-nowrap"
             >
               CERTIFICADO
             </a>
-            
+            <a
               href="/seminario#inscricao"
               className="bg-ink text-cream px-2 py-1.5 sm:px-5 sm:py-2.5 text-[10px] sm:text-sm font-bold rounded-sm hover:opacity-90 transition whitespace-nowrap"
             >
@@ -310,7 +256,7 @@ function Index() {
       </header>
 
       {/* LUHARA + CHAT */}
-      <section className="relative max-w-7xl mx-auto px-6 pt-6 pb-20 md:pt-10 md:pb-32 flex flex-col items-center text-center">
+      <section className="max-w-7xl mx-auto px-6 pt-6 pb-20 md:pt-10 md:pb-32 flex flex-col items-center text-center">
         <div className="text-lg sm:text-xl md:text-2xl font-light text-ink/70 mb-4 break-words max-w-3xl">
           Projeto Territórios Sustentáveis Fase II
         </div>
@@ -324,7 +270,6 @@ function Index() {
           Luhara
         </div>
         <ChatPill />
-        <IntroVideoModal />
       </section>
 
       {/* SOBRE */}
@@ -431,6 +376,7 @@ function Index() {
         </div>
       </footer>
 
+      <IntroVideoModal />
       <CookieConsent />
     </main>
   );
