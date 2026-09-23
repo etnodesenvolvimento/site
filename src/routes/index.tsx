@@ -115,7 +115,6 @@ function CookieConsent() {
 
 // ======================================================================
 // VÍDEO DA LUHARA: modal grande + mini player travado na seção da Luhara
-// (renderizado DENTRO da seção "LUHARA + CHAT", que tem "relative")
 // ======================================================================
 
 function BigVideoModal({ onClose }: { onClose: () => void }) {
@@ -129,8 +128,9 @@ function BigVideoModal({ onClose }: { onClose: () => void }) {
     v.muted = false;
     v.play().catch((err: any) => {
       if (err && err.name === "AbortError") return;
-      // Navegador bloqueou autoplay com som. Cai pra mudo pra garantir
-      // que o vídeo toque, e mostra um botão pra ativar o som.
+      // Navegador bloqueou autoplay com som (comportamento padrão em quem
+      // ainda não interagiu com o domínio). Caímos pra mudo pra garantir
+      // que o vídeo toque, e mostramos um botão pra ativar o som.
       v.muted = true;
       setNeedsUnmute(true);
       v.play().catch(() => {});
